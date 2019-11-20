@@ -1,0 +1,80 @@
+{
+  "ID": 1,
+  "lendingList": [
+    {
+      "productID": 1,
+      "startDate": null,
+      "endDate": null,
+      "dailyPrice": 10000,
+      "weeklyPrice": 100000,
+      "monthlyPrice": 1000000,
+      "renter": {
+        "ID": 1,
+        "firstName": "A",
+        "lastName": "B",
+        "phone": "0987654321",
+        "address": "Hanoi"
+      }
+    },
+    {
+      "productID": 1,
+      "startDate": null,
+      "endDate": null,
+      "dailyPrice": 10000,
+      "weeklyPrice": 100000,
+      "monthlyPrice": 1000000,
+      "lender": {
+        "ID": 1,
+        "firstName": "A",
+        "lastName": "B",
+        "phone": "0987654321",
+        "address": "Hanoi"
+      }
+    },
+    {
+      "productID": 1,
+      "startDate": null,
+      "endDate": null,
+      "dailyPrice": 10000,
+      "weeklyPrice": 100000,
+      "monthlyPrice": 1000000,
+      "lender": {
+        "ID": 1,
+        "firstName": "A",
+        "lastName": "B",
+        "phone": "0987654321",
+        "address": "Hanoi"
+      }
+    },
+    {
+      "productID": 1,
+      "startDate": null,
+      "endDate": null,
+      "dailyPrice": 10000,
+      "weeklyPrice": 100000,
+      "monthlyPrice": 1000000,
+      "lender": {
+        "ID": 1,
+        "firstName": "A",
+        "lastName": "B",
+        "phone": "0987654321",
+        "address": "Hanoi"
+      }
+    },
+    {
+      "productID": 1,
+      "startDate": null,
+      "endDate": null,
+      "dailyPrice": 10000,
+      "weeklyPrice": 100000,
+      "monthlyPrice": 1000000,
+      "lender": {
+        "ID": 1,
+        "firstName": "A",
+        "lastName": "B",
+        "phone": "0987654321",
+        "address": "Hanoi"
+      }
+    }
+  ]
+}

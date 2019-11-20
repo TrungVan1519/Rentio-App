@@ -1,0 +1,47 @@
+[
+  {
+    "productID": 1,
+    "productName": "product name",
+    "startDate": null,
+    "endDate": null,
+    "price": 12345,
+    "lenderID": 1,
+    "renterID": 2
+  },
+  {
+    "productID": 1,
+    "productName": "product name",
+    "startDate": null,
+    "endDate": null,
+    "price": 12345,
+    "lenderID": 1,
+    "renterID": 2
+  },
+  {
+    "productID": 1,
+    "productName": "product name",
+    "startDate": null,
+    "endDate": null,
+    "price": 12345,
+    "lenderID": 1,
+    "renterID": 2
+  },
+  {
+    "productID": 1,
+    "productName": "product name",
+    "startDate": null,
+    "endDate": null,
+    "price": 12345,
+    "lenderID": 1,
+    "renterID": 2
+  },
+  {
+    "productID": 1,
+    "productName": "product name",
+    "startDate": null,
+    "endDate": null,
+    "price": 12345,
+    "lenderID": 1,
+    "renterID": 2
+  }
+]
