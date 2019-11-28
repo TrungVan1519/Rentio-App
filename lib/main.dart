@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/component/reusable_item_card.dart';
+import 'package:rentio/screens/category_screen.dart';
 import 'package:rentio/screens/home_screen.dart';
+import 'package:rentio/utility/try_new_widget.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,10 +15,13 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: Color(0xFFF3F3F7),
       ),
+      //home: HomePage(),
       home: HomePage(),
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
+        CategoryScreen.routeName: (context) => CategoryScreen(),
       },
     );
   }
@@ -30,8 +36,12 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   List<Widget> widgetOption = [
     HomeScreen(),
-    Text(
-      'Index 1: Category',
+    ReusableItemCard(
+      productName: 'Ao Son Tung',
+      productAddress: 'Thanh Xuan',
+      price: 123456,
+      imageUrl:
+          'https://i.kym-cdn.com/entries/icons/original/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.png',
     ),
     Text(
       'Index 2: Products',
@@ -51,34 +61,47 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            SizedBox(
-              width: 50.0,
+        title: Text('Rentio'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: <Color>[
+                Color(0xFF191654),
+                Color(0xFF43C6AC),
+              ],
             ),
-            Text('Rentio'),
-            IconButton(
-              alignment: Alignment.centerRight,
-              icon: Icon(Icons.search),
-              onPressed: () {},
-            ),
-            // Flexible(
-            //   child: TextField(
-            //     //controller: editingController,
-            //     decoration: InputDecoration(
-            //       hintText: "Bạn cần tìm gì...",
-            //       prefixIcon: Icon(Icons.search),
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.all(
-            //           Radius.circular(25.0),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-          ],
+          ),
         ),
+
+        // Flexible(
+        //   child: TextField(
+        //     //controller: editingController,
+        //     decoration: InputDecoration(
+        //       hintText: "Bạn cần tìm gì...",
+        //       prefixIcon: Icon(Icons.search),
+        //       border: OutlineInputBorder(
+        //         borderRadius: BorderRadius.all(
+        //           Radius.circular(25.0),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+
+        actions: <Widget>[
+          IconButton(
+            alignment: Alignment.centerRight,
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: ProductSearch(),
+              );
+            },
+          ),
+        ],
       ),
       body: Container(
         child: widgetOption.elementAt(selectedIndex),
@@ -104,9 +127,38 @@ class _HomePageState extends State<HomePage> {
           )
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Color(0xFF43C6AC),
         onTap: onItemTapped,
       ),
     );
   }
 }
+
+class ProductSearch extends SearchDelegate<Product> {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(icon: Icon(Icons.clear), onPressed: () {}),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    return null;
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    return null;
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    return null;
+  }
+}
+
+class Product {}
