@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rentio/component/reusable_item_card.dart';
+import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/screens/category_screen.dart';
 import 'package:rentio/screens/home_screen.dart';
-import 'package:rentio/utility/try_new_widget.dart';
+import 'package:rentio/utilities/try_new_widget.dart';
 
 void main() => runApp(MyApp());
 
