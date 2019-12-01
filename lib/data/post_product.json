@@ -1,0 +1,9 @@
+{
+  "name": "Trash",
+  "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+  "price": {
+    "daily": 0.99,
+    "weekly": 9.0,
+    "monthly": 10.0
+  }
+}

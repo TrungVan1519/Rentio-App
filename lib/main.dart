@@ -43,9 +43,7 @@ class _HomePageState extends State<HomePage> {
       imageUrl:
           'https://i.kym-cdn.com/entries/icons/original/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.png',
     ),
-    Text(
-      'Index 2: Products',
-    ),
+    MyTestWidget(),
     Text(
       'Index 3: Baby',
     ),
