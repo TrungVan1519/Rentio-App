@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/screens/account_screen.dart';
 import 'package:rentio/screens/category_screen.dart';
 import 'package:rentio/screens/home_page.dart';
 import 'package:rentio/screens/home_screen.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Color(0xFFF3F3F7),
       ),
-      home: HomePage(),
+      home: UserScreen(),
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         CategoryScreen.routeName: (context) => CategoryScreen(),

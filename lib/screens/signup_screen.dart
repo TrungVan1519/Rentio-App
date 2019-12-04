@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/components/reusable_alert.dart';
+import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/validation/regex_model.dart';
 
@@ -29,10 +31,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
-        padding: EdgeInsets.all(20.0),
-        // > padding toan bo Widgets con theo left right, top, bottom
-        // > Cac Widgets con chi can padding top, bottom voi nhau ma khong can
-        //    padding left, right
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
@@ -43,147 +41,194 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ],
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Text(
-                'Welcome to Retio',
-                style: TextStyle(
-                  fontFamily: 'Pacifico',
-                  fontSize: kFontTextSize,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: TextField(
-                style: TextStyle(
-                  fontSize: kFontTextSize,
-                ),
-                maxLength: 30,
-                controller: _userNameController,
-                decoration: InputDecoration(
-                  labelText: 'Username (6-30)',
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: kFontLabelSize,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                  errorText: _userNameValid ? null : _userNameError,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: TextField(
-                style: TextStyle(
-                  fontSize: kFontTextSize,
-                ),
-                maxLength: 30,
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password (6-30)',
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: kFontLabelSize,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                  errorText: _passwordValid ? null : _passwordError,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: TextField(
-                style: TextStyle(
-                  fontSize: kFontTextSize,
-                ),
-                maxLength: 30,
-                controller: _fullNameController,
-                decoration: InputDecoration(
-                  labelText: 'Full name',
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: kFontLabelSize,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                  errorText: _fullNameValid ? null : _fullNameError,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: TextField(
-                style: TextStyle(
-                  fontSize: kFontTextSize,
-                ),
-                maxLength: 30,
-                controller: _phoneNumberController,
-                decoration: InputDecoration(
-                  labelText: 'Phone number',
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: kFontLabelSize,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                  errorText: _phoneNumberValid ? null : _phoneNumberError,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: TextField(
-                style: TextStyle(
-                  fontSize: kFontTextSize,
-                ),
-                maxLength: 30,
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: kFontLabelSize,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
-                  ),
-                  errorText: _emailValid ? null : _emailError,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0),
-              child: Container(
-                width: 200.0,
-                height: 50.0,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  color: Colors.white,
-                  onPressed: onSignUpPressed,
-                  child: Text(
-                    'Sign up',
-                    style: TextStyle(
-                      color: Colors.teal,
-                      fontSize: kFontTextSize,
-                      fontWeight: FontWeight.bold,
+            Container(
+              padding: EdgeInsets.all(20.0),
+              // > padding toan bo Widgets con theo left right, top, bottom
+              // > Cac Widgets con chi can padding top, bottom voi nhau ma khong can
+              //    padding left, right
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Text(
+                      'Welcome to Retio',
+                      style: TextStyle(
+                        fontFamily: 'Pacifico',
+                        fontSize: kFontTextSize,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: kFontTextSize,
+                      ),
+                      maxLength: 30,
+                      controller: _userNameController,
+                      decoration: InputDecoration(
+                        labelText: 'Username (6-30)',
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: kFontLabelSize,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                        errorText: _userNameValid ? null : _userNameError,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: kFontTextSize,
+                      ),
+                      maxLength: 30,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        labelText: 'Password (6-30)',
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: kFontLabelSize,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                        errorText: _passwordValid ? null : _passwordError,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: kFontTextSize,
+                      ),
+                      maxLength: 30,
+                      controller: _fullNameController,
+                      decoration: InputDecoration(
+                        labelText: 'Full name (5-30)',
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: kFontLabelSize,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                        errorText: _fullNameValid ? null : _fullNameError,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: kFontTextSize,
+                      ),
+                      maxLength: 30,
+                      controller: _phoneNumberController,
+                      decoration: InputDecoration(
+                        labelText: 'Phone number (9-30)',
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: kFontLabelSize,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                        errorText: _phoneNumberValid ? null : _phoneNumberError,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: kFontTextSize,
+                      ),
+                      maxLength: 30,
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Email (@gmail.com)',
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: kFontLabelSize,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                        errorText: _emailValid ? null : _emailError,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5.0),
+                    child: Container(
+                      width: 200.0,
+                      height: 50.0,
+                      child: RaisedGradientButton(
+                        borderRadius: BorderRadius.circular(30.0),
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(kGradientColorElement1),
+                            Color(kGradientColorElement2),
+                          ],
+                        ),
+                        onPressed: onSignUpPressed,
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: kFontTextSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+//                child: RaisedButton(
+//                  shape: RoundedRectangleBorder(
+//                    borderRadius: BorderRadius.circular(10.0),
+//                  ),
+//                  color: Colors.white,
+//                  onPressed: onSignUpPressed,
+//                  child: Text(
+//                    'Sign up',
+//                    style: TextStyle(
+//                      color: Colors.teal,
+//                      fontSize: kFontTextSize,
+//                      fontWeight: FontWeight.bold,
+//                    ),
+//                    textAlign: TextAlign.center,
+//                  ),
+//                ),
+                    ),
+                  )
+                ],
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ),
+                    onPressed: onBackwardPressed,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void onBackwardPressed() {
+    Navigator.pop(context);
   }
 
   void onSignUpPressed() {
@@ -226,6 +271,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _emailValid = true;
       } else {
         _emailValid = false;
+      }
+
+      if (_userNameValid &&
+          _passwordValid &&
+          _fullNameValid &&
+          _phoneNumberValid &&
+          _emailValid) {
+        ReusableAlert(
+                context: context,
+                title: 'Conpleted',
+                desc: 'Your account was created completed')
+            .getAlert();
       }
     });
   }

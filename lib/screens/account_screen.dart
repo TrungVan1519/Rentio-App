@@ -23,49 +23,78 @@ class _UserScreenState extends State<UserScreen> {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40.0),
-              child: Text(
-                'Rentio',
-                style: TextStyle(
-                  fontFamily: 'Pacifico',
-                  fontWeight: FontWeight.bold,
-                  fontSize: kFontTitleSize,
-                ),
+              padding: const EdgeInsets.only(top: 20.0, bottom: 50.0),
+              child: Row(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                    ),
+                    onPressed: onBackwardPressed,
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Container(
-                width: 200.0,
-                height: 50.0,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40.0),
+                  child: Text(
+                    'Rentio',
+                    style: TextStyle(
+                      fontFamily: 'Pacifico',
+                      fontWeight: FontWeight.bold,
+                      fontSize: kFontTitleSize,
+                    ),
                   ),
-                  color: Color(kGradientColorElement1),
-                  onPressed: onSignInPressed,
-                  child: Text('Sign in'),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Container(
-                width: 200.0,
-                height: 50.0,
-                child: RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      color: Color(kGradientColorElement1),
+                      onPressed: onSignInPressed,
+                      child: Text(
+                        'Sign in',
+                        style: TextStyle(
+                          fontSize: kFontLabelSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                  color: Color(kGradientColorElement1),
-                  onPressed: onSignUpPressed,
-                  child: Text('Sign up'),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Container(
+                    width: 200.0,
+                    height: 50.0,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      color: Color(kGradientColorElement1),
+                      onPressed: onSignUpPressed,
+                      child: Text(
+                        'Sign up',
+                        style: TextStyle(
+                          fontSize: kFontLabelSize,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -85,5 +114,9 @@ class _UserScreenState extends State<UserScreen> {
       context,
       MaterialPageRoute(builder: (context) => SignUpScreen()),
     );
+  }
+
+  void onBackwardPressed() {
+    Navigator.pop(context);
   }
 }
