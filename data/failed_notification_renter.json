@@ -1,3 +1,12 @@
 {
-  "message": "Order failed"
+    "id": 2,
+    "product_id": 1,
+    "start_date": "2019/02/03",
+    "end_date": "2019/02/29",
+    "lender_national_id": "193140321879",
+    "renter_national_id": null,
+    "bank_number": "13482345817381",
+    "lender_id": 1,
+    "renter_id": 3,
+    "accepted": false
 }

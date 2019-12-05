@@ -3,12 +3,12 @@
     {
       "id": 1,
       "type": "household",
-      "image": "http://0.0.0.0:8080/household.jpg"
+      "img_url": "http://0.0.0.0:8080/household.jpg"
     },
     {
       "id": 2,
       "type": "device",
-      "image": "http://0.0.0.0:8080/device.jpg"
+      "img_url": "http://0.0.0.0:8080/device.jpg"
     }
   ]
 }

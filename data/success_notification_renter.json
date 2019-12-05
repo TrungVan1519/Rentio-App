@@ -1,36 +1,12 @@
 {
-  "message": "order successfully",
-  "order": {
-    "product": {
-      "id": 1,
-      "name": "Household",
-      "price": {
-        "daily": 0.99,
-        "weekly": 2.0,
-        "monthly": 4.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    "start_date": "2019/02/01",
-    "end_date": "2019/02/30",
-    "lender_national_id": "193240321879",
-    "renter_national_id": "328147194773",
-    "bank_number": "13482345817382",
-    "lender": {
-      "id": 1,
-      "first_name": "Hue",
-      "last_name": "Nguyen",
-      "phone": "0912321873",
-      "email": "sadfajkdfh@gmail.com",
-      "address": "Hanoi"
-    },
-    "renter_id": {
-      "id": 3,
-      "first_name": "Duy",
-      "last_name": "Le",
-      "phone": "0912321873",
-      "email": "aDDAFEh@gmail.com",
-      "address": "Hanoi"
-    }
-  }
+    "id": 2,
+    "product_id": 1,
+    "start_date": "2019/02/03",
+    "end_date": "2019/02/29",
+    "lender_national_id": "193140321879",
+    "renter_national_id": "193140321879",
+    "bank_number": "13482345817381",
+    "lender_id": 1,
+    "renter_id": 3,
+    "accepted": true
 }

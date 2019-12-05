@@ -1,9 +1,9 @@
 {
-  "name": "RC Toy",
-  "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
-  "price": {
-    "daily": 0.99,
-    "weekly": 9.0,
-    "monthly": 10.0
-  }
+  "name": "Trash",
+  "img_vid_url": "http://0.0.0.0:8080/<username>/<name>/",
+  "daily_price": 0.99,
+  "weekly_price": 9.0,
+  "monthly_price": 10.0,
+  "catalog_type": "household"
+  "user_id": 1
 }
