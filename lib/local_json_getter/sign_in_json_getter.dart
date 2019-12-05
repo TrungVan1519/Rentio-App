@@ -3,13 +3,17 @@ import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
 class JsonGetter {
-  Future<String> _loadJson(String jsonFileName) async {
-    String jsonString = await rootBundle.loadString(jsonFileName);
-    return jsonString;
+  String jsonNameFile;
+
+  JsonGetter({this.jsonNameFile});
+
+  Future<String> _loadJson() async {
+    return await rootBundle.loadString(jsonNameFile);
   }
 
-  Future<dynamic> loadData({String jsonFileName}) async {
-    String jsonData = await _loadJson(jsonFileName);
-    return json.decode(jsonData);
+  Future<dynamic> loadData() async {
+    await Future.delayed(Duration(seconds: 5), () => {});
+    String jsonString = await _loadJson();
+    return json.decode(jsonString);
   }
 }

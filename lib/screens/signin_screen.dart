@@ -264,10 +264,10 @@ class _SignInScreenState extends State<SignInScreen> {
       isLoading = true;
     });
 
-    var data = await JsonGetter().loadData(jsonFileName: 'data/login.json');
+    var data = await JsonGetter(jsonNameFile: 'data/login.json').loadData();
     // Dong data nay de truyen sang User_Screen
     var fullNameData =
-        await JsonGetter().loadData(jsonFileName: 'data/signup.json');
+        await JsonGetter(jsonNameFile: 'data/signup.json').loadData();
     String fullName =
         fullNameData['firstname'] + ' ' + fullNameData['lastname'];
     print(fullName);

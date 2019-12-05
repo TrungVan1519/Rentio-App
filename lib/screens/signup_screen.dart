@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/utilities/constants.dart';
-import 'package:rentio/services/regex_model.dart';
+import 'package:rentio/validation/regex_model.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override

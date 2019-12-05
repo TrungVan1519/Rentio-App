@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 
 class ReusableItemCard extends StatelessWidget {
   ReusableItemCard(
-      {this.productName, this.productAddress, this.price, this.imageUrl});
+      {this.productName,
+      this.productAddress,
+      this.price,
+      this.imageUrl,
+      this.onPressed});
 
   final String productName;
   final String productAddress;
   final double price;
   final String imageUrl;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: onPressed,
       title: Card(
         elevation: 5.0,
         child: Container(
