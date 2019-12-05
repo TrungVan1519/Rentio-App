@@ -1,7 +1,10 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
+import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:rentio/screens/renting_screen.dart';
+import 'package:rentio/screens/updating_account_info_screen.dart';
+import 'package:rentio/screens/updating_user_info_screen.dart';
 import 'package:rentio/utilities/constants.dart';
 
 class UserScreen extends StatefulWidget {
@@ -116,7 +119,10 @@ class _UserScreenState extends State<UserScreen> {
               ),
               Container(
                 width: 100,
-                child: Icon(Icons.build),
+                child: GestureDetector(
+                  onTap: onChangingInfoPressed,
+                  child: Icon(Icons.build),
+                ),
               ),
             ],
           ),
@@ -236,13 +242,52 @@ class _UserScreenState extends State<UserScreen> {
     Navigator.pop(context, false);
   }
 
-  void onRentNowPressed() {}
+  void onRentNowPressed() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RentingScreen()),
+    );
+  }
 
   void onRentingItemsPressed() {}
 
   void onRentedItemsPressed() {}
 
-  void onChangeInfoPressed() {}
+  void onChangingInfoPressed() {
+    List<DialogButtonInfoModel> list = [
+      DialogButtonInfoModel(
+          contentOption: 'My info',
+          color: Color(kGradientColorElement1),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UpdatingUserInfoScreen()),
+            );
+          }),
+      DialogButtonInfoModel(
+          contentOption: 'Account info',
+          color: Color(kGradientColorElement2),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => UpdatingAccountInfoScreen()),
+            );
+          }),
+      DialogButtonInfoModel(
+          contentOption: 'Cancel',
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          }),
+    ];
+
+    ReusableAlert(
+      context: context,
+      title: 'What do you want to update?',
+      list: list,
+    ).getUserOption();
+  }
 
   void onSignOutPressed() {
     Navigator.pop(context, false);
