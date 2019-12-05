@@ -4,166 +4,51 @@
       "id": 1,
       "name": "Racket",
       "status": true,
-      "price": {
-        "daily": 0.99,
-        "weekly": 2.0,
-        "monthly": 4.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
+      "daily_price": 0.99,
+      "weekly_price": 2.0,
+      "monthly_price": 4.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
     },
     {
       "id": 2,
       "name": "Scissor",
       "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 2
     },
     {
       "id": 3,
       "name": "Scissor",
       "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
     },
     {
       "id": 4,
       "name": "Scissor",
       "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
     },
     {
       "id": 5,
       "name": "Scissor",
       "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 6,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 7,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 8,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 9,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 10,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 11,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 12,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 13,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 14,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
-    },
-    {
-      "id": 15,
-      "name": "Scissor",
-      "status": false,
-      "price": {
-        "daily": 1.99,
-        "weekly": 3.0,
-        "monthly": 5.0
-      },
-      "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
     }
   ]
 }
