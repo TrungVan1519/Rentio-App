@@ -3,12 +3,12 @@ import 'package:rentio/screens/signin_screen.dart';
 import 'package:rentio/screens/signup_screen.dart';
 import 'package:rentio/utilities/constants.dart';
 
-class UserScreen extends StatefulWidget {
+class AccountScreen extends StatefulWidget {
   @override
-  _UserScreenState createState() => _UserScreenState();
+  _AccountScreenState createState() => _AccountScreenState();
 }
 
-class _UserScreenState extends State<UserScreen> {
+class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
