@@ -2,12 +2,27 @@
   "catalogs": [
     {
       "id": 1,
-      "type": "household",
+      "type": "Household appliants",
       "img_url": "http://0.0.0.0:8080/household.jpg"
     },
     {
       "id": 2,
-      "type": "device",
+      "type": "Device",
+      "img_url": "http://0.0.0.0:8080/device.jpg"
+    },
+    {
+      "id": 3,
+      "type": "Books",
+      "img_url": "http://0.0.0.0:8080/device.jpg"
+    },
+    {
+      "id": 4,
+      "type": "Toys & Games",
+      "img_url": "http://0.0.0.0:8080/device.jpg"
+    },
+    {
+      "id": 5,
+      "type": "Office appliants",
       "img_url": "http://0.0.0.0:8080/device.jpg"
     }
   ]

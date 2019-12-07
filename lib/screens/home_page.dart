@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/screens/account_screen.dart';
+import 'package:rentio/screens/category_screen.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
 
 import 'home_screen.dart';
@@ -14,13 +15,7 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   List<Widget> widgetOption = [
     HomeScreen(),
-    ReusableItemCard(
-      productName: 'Ao Son Tung',
-      productAddress: 'Thanh Xuan',
-      price: 123456,
-      imageUrl:
-          'https://i.kym-cdn.com/entries/icons/original/000/027/475/Screen_Shot_2018-10-25_at_11.02.15_AM.png',
-    ),
+    CategoryScreen(),
     MyTestWidget(),
     UserScreen()
   ];

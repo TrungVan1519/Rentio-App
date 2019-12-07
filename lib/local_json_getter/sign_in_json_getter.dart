@@ -16,4 +16,9 @@ class JsonGetter {
     String jsonString = await _loadJson();
     return json.decode(jsonString);
   }
+
+  Future<dynamic> loadDataWithoutDelay() async {
+    String jsonString = await _loadJson();
+    return json.decode(jsonString);
+  }
 }
