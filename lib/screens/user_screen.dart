@@ -2,7 +2,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
-import 'package:rentio/screens/renting_screen.dart';
+import 'package:rentio/screens/lending_screen.dart';
 import 'package:rentio/screens/updating_account_info_screen.dart';
 import 'package:rentio/screens/updating_user_info_screen.dart';
 import 'package:rentio/utilities/constants.dart';
@@ -105,9 +105,9 @@ class _UserScreenState extends State<UserScreen> {
                     ),
                   ),
                   color: Colors.white,
-                  onPressed: onRentNowPressed,
+                  onPressed: onLendNowPressed,
                   child: Text(
-                    'Rent now',
+                    'Lend now',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: kFontLabelSize,
@@ -193,16 +193,16 @@ class _UserScreenState extends State<UserScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      onPressed: onRentingItemsPressed,
-                      child: Text('Mặt hàng đang cho thuê'),
+                      onPressed: onLendingItemsPressed,
+                      child: Text('Items have been lent'),
                     ),
                     RaisedButton(
                       color: Color(kGradientColorElement1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      onPressed: onRentedItemsPressed,
-                      child: Text('Mặt hàng đang thuê'),
+                      onPressed: onRentingItemsPressed,
+                      child: Text('Items have been rented'),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -242,16 +242,16 @@ class _UserScreenState extends State<UserScreen> {
     Navigator.pop(context, false);
   }
 
-  void onRentNowPressed() {
+  void onLendNowPressed() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => RentingScreen()),
+      MaterialPageRoute(builder: (context) => LendingScreen()),
     );
   }
 
-  void onRentingItemsPressed() {}
+  void onLendingItemsPressed() {}
 
-  void onRentedItemsPressed() {}
+  void onRentingItemsPressed() {}
 
   void onChangingInfoPressed() {
     List<DialogButtonInfoModel> list = [

@@ -32,8 +32,8 @@ class ReusableItemCard extends StatelessWidget {
               Flexible(
                 child: Image.network(imageUrl),
               ),
-              Text(productName),
-              Text(productAddress),
+              Text(productName.toString()),
+              Text(productAddress.toString()),
               Text(price.toString()),
             ],
           ),

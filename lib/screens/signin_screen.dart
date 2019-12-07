@@ -265,13 +265,11 @@ class _SignInScreenState extends State<SignInScreen> {
     });
 
     var data = await JsonGetter(jsonNameFile: 'data/login.json').loadData();
-    print(data);
     // Dong data nay de truyen sang User_Screen
     var fullNameData =
         await JsonGetter(jsonNameFile: 'data/signup.json').loadData();
     String fullName =
         fullNameData['firstname'] + ' ' + fullNameData['lastname'];
-    print(fullName);
 
     if (data != null) {
       if (_userNameController.text.compareTo(data['username']) == 0) {
@@ -319,9 +317,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   void onForgotPasswordPressed() {
     ReusableAlert(
-            context: context,
-            title: 'Forgot password??',
-            desc: 'You should create new account')
-        .getAlert();
+      context: context,
+      title: 'Forgot password??',
+      desc: 'You should create new account',
+    ).getAlert();
   }
 }

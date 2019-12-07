@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/components/reusable_item_card.dart';
+import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 import 'package:rentio/utilities/constants.dart';
 
-class RentingScreen extends StatefulWidget {
+class LendingScreen extends StatefulWidget {
   @override
-  _RentingScreenState createState() => _RentingScreenState();
+  _LendingScreenState createState() => _LendingScreenState();
 }
 
-class _RentingScreenState extends State<RentingScreen> {
+class _LendingScreenState extends State<LendingScreen> {
+  var data;
+  List<Object> list;
+
+  Future initJsonData() async {
+    return await JsonGetter(jsonNameFile: 'data/response_product_in_stock.json')
+        .loadData();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initJsonData().then((result) {
+      setState(() {
+        data = result;
+//        list
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,8 +105,40 @@ class _RentingScreenState extends State<RentingScreen> {
           ),
           Container(
             height: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).size.height * 0.4,
+                MediaQuery.of(context).size.height * 0.3,
             width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Danh sach san pham cho thue',
+                    style: TextStyle(
+                      fontSize: kFontTextSize,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  CustomScrollView(
+                    shrinkWrap: true,
+                    slivers: <Widget>[
+                      SliverGrid(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) => ReusableItemCard(
+                            productName: data['products'][index]['name'],
+                            price: data['products'][1]['daily_price'],
+                            imageUrl:
+                                'images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+                          ),
+                          childCount: 2,
+                        ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           )
         ],
       ),
