@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     HomeScreen(),
     CategoryScreen(),
     MyTestWidget(),
-    UserScreen()
+    AccountScreen()
   ];
 
   void onItemTapped(int index) {

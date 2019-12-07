@@ -3,7 +3,7 @@ import 'package:rentio/screens/account_screen.dart';
 import 'package:rentio/screens/category_screen.dart';
 import 'package:rentio/screens/home_page.dart';
 import 'package:rentio/screens/home_screen.dart';
-import 'package:rentio/screens/renting_screen.dart';
+import 'package:rentio/screens/lending_screen.dart';
 import 'package:rentio/screens/signin_screen.dart';
 import 'package:rentio/screens/signup_screen.dart';
 
