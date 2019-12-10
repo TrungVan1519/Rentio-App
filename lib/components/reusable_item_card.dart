@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Stateless Widget to layout item card such as product card and catalog card
 class ReusableItemCard extends StatelessWidget {
   ReusableItemCard(
       {@required this.isProduct,
@@ -19,6 +20,7 @@ class ReusableItemCard extends StatelessWidget {
   final String catalogName;
 
   Widget getImage() {
+    //Check whether network image or asset image
     if (imageUrl.contains('http')) {
       return Flexible(
         child: Image.network(imageUrl.toString()),

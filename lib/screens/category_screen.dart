@@ -20,8 +20,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     getJson().then((result) {
-      print('hiosadiosancsndovndsvndsvnsdoivnsdivnisodnvoisdnvsdiv' +
-          result['catalogs'][0]['type']);
       setState(() {
         jsonData = result;
       });
@@ -29,29 +27,39 @@ class _CategoryScreenState extends State<CategoryScreen> {
     super.initState();
   }
 
+  Widget loadLoadingWidget() {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget loadWidgetWithData() {
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverGrid(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return ReusableItemCard(
+                isProduct: false,
+                catalogName: jsonData['catalogs'][index]['type'],
+                imageUrl:
+                    'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
+              );
+            },
+            childCount: 5,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return ReusableItemCard(
-                  isProduct: false,
-                  catalogName: jsonData['catalogs'][index]['type'],
-                  imageUrl:
-                      'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
-                );
-              },
-              childCount: 5,
-            ),
-          ),
-        ],
-      ),
+      body: jsonData == null ? loadLoadingWidget() : loadWidgetWithData(),
     );
   }
 }
