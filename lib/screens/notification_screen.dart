@@ -11,7 +11,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   var jsonData;
 
   Future getJson() async {
-    return await JsonGetter(jsonNameFile: 'data/').loadData();
+    return await JsonGetter(jsonFileName: 'data/').loadData();
   }
 
   @override

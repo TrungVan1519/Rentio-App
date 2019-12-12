@@ -3,12 +3,12 @@ import 'dart:async' show Future;
 import 'package:flutter/services.dart' show rootBundle;
 
 class JsonGetter {
-  String jsonNameFile;
+  String jsonFileName;
 
-  JsonGetter({this.jsonNameFile});
+  JsonGetter({this.jsonFileName});
 
   Future<String> _loadJson() async {
-    return await rootBundle.loadString(jsonNameFile);
+    return await rootBundle.loadString(jsonFileName);
   }
 
   Future<dynamic> loadData() async {

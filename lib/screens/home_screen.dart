@@ -15,11 +15,11 @@ class _HomeScreenState extends State<HomeScreen> {
   var topLenderData;
 
   Future getTopLenderJson() async {
-    return await JsonGetter(jsonNameFile: 'data/top_lender.json').loadData();
+    return await JsonGetter(jsonFileName: 'data/top_lender.json').loadData();
   }
 
   Future getPopularProductJson() async {
-    return await JsonGetter(jsonNameFile: 'data/popular_product.json')
+    return await JsonGetter(jsonFileName: 'data/popular_product.json')
         .loadData();
   }
 

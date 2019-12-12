@@ -5,7 +5,7 @@ class CubeGridLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpinKitCubeGrid(
-      color: Colors.white,
+      color: Colors.brown,
       size: 50.0,
       duration: Duration(seconds: 1),
     );
