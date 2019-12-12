@@ -84,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       padding: EdgeInsets.symmetric(vertical: 10.0),
                       child: TextField(
                         style: TextStyle(
-                          fontSize: kFontTextSize,
+                          fontSize: kFontTextSmallSize,
                         ),
                         maxLength: 30,
                         controller: _userNameController,
@@ -116,7 +116,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         children: <Widget>[
                           TextField(
                             style: TextStyle(
-                              fontSize: kFontTextSize,
+                              fontSize: kFontTextSmallSize,
                             ),
                             obscureText: _hidePassword,
                             maxLength: 30,
@@ -150,7 +150,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 _hidePassword ? 'SHOW' : 'HIDE',
                                 style: TextStyle(
                                   color: Color(kGradientColorElement1),
-                                  fontSize: kFontTextSize,
+                                  fontSize: kFontTextSmallSize,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
