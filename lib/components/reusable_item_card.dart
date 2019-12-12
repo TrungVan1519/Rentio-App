@@ -44,6 +44,8 @@ class ReusableItemCard extends StatelessWidget {
             ),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               getImage(),
               Text(productName.toString()),

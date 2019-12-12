@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/screens/account_screen.dart';
 import 'package:rentio/screens/category_screen.dart';
+import 'package:rentio/screens/product_detail_screen.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
 
 import 'home_screen.dart';
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> widgetOption = [
     HomeScreen(),
     CategoryScreen(),
-    MyTestWidget(),
+    ProductDetailScreen(),
     AccountScreen()
   ];
 
