@@ -14,6 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var popularProductData;
   var topLenderData;
 
+<<<<<<< HEAD
   Future getTopLenderJson() async {
     return await JsonGetter(jsonFileName: 'data/top_lender.json').loadData();
   }
@@ -179,6 +180,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
     );
+=======
+  void getJson() async {
+    jsonData =
+        await JsonGetter(jsonFileName: 'data/popular_product.json').loadData();
+>>>>>>> a7ee38a167d08a3223531b09272c8ace66488045
   }
 
   @override

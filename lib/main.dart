@@ -22,7 +22,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Color(0xFFF3F3F7),
       ),
+<<<<<<< HEAD
       home: ProductDetailScreen(),
+=======
+      home: SignInScreen(),
+>>>>>>> a7ee38a167d08a3223531b09272c8ace66488045
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         CategoryScreen.routeName: (context) => CategoryScreen(),

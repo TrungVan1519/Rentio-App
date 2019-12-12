@@ -19,6 +19,11 @@ class ReusableItemCard extends StatelessWidget {
   final bool isProduct;
   final String catalogName;
 
+  @override
+  Widget build(BuildContext context) {
+    return isProduct ? getProductCard() : getCatalogCard();
+  }
+
   Widget getImage() {
     //Check whether network image or asset image
     if (imageUrl.contains('http')) {
@@ -79,10 +84,5 @@ class ReusableItemCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return isProduct ? getProductCard() : getCatalogCard();
   }
 }
