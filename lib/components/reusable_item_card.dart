@@ -18,6 +18,11 @@ class ReusableItemCard extends StatelessWidget {
   final bool isProduct;
   final String catalogName;
 
+  @override
+  Widget build(BuildContext context) {
+    return isProduct ? getProductCard() : getCatalogCard();
+  }
+
   Widget getImage() {
     if (imageUrl.contains('http')) {
       return Flexible(
@@ -75,10 +80,5 @@ class ReusableItemCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return isProduct ? getProductCard() : getCatalogCard();
   }
 }

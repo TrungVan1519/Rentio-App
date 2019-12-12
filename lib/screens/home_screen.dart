@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getJson() async {
     jsonData =
-        await JsonGetter(jsonNameFile: 'data/popular_product.json').loadData();
+        await JsonGetter(jsonFileName: 'data/popular_product.json').loadData();
   }
 
   @override

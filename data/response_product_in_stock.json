@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 1,
-      "name": "Racket",
+      "name": "Racket1",
       "status": false,
       "daily_price": 0.99,
       "weekly_price": 2.0,
@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "name": "Rackettt",
+      "name": "Racket2",
       "status": false,
       "daily_price": 0.99,
       "weekly_price": 2.0,
@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "name": "Racket",
+      "name": "Racket3",
       "status": false,
       "daily_price": 0.99,
       "weekly_price": 2.0,

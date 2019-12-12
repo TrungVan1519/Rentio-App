@@ -14,7 +14,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   var jsonData;
 
   Future getJson() async {
-    return await JsonGetter(jsonNameFile: 'data/catalog.json').loadData();
+    return await JsonGetter(jsonFileName: 'data/catalog.json').loadData();
   }
 
   @override

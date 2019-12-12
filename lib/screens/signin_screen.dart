@@ -19,121 +19,77 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   bool isLoading = false;
-  int displayedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown,
-      body: IndexedStack(
-        index: isLoading ? 0 : 1,
+      body: Stack(
         children: <Widget>[
-          Container(
-            child: Center(
-              child: CubeGridLoading(),
-            ),
-          ),
-          Container(
-            constraints: BoxConstraints.expand(),
-            padding: EdgeInsets.all(20.0),
-            // > padding toan bo Widgets con theo left right, top, bottom
-            // > Cac Widgets con chi can padding top, bottom voi nhau ma khong can
-            //    padding left, right
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color(kGradientColorElement1),
-                  Color(kGradientColorElement2)
-                ],
+          IndexedStack(
+            index: isLoading ? 0 : 1,
+            children: <Widget>[
+              Container(
+                child: Center(
+                  child: CubeGridLoading(),
+                ),
               ),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
+              Container(
+                constraints: BoxConstraints.expand(),
+                padding: EdgeInsets.all(20.0),
+                // > padding toan bo Widgets con theo left right, top, bottom
+                // > Cac Widgets con chi can padding top, bottom voi nhau ma khong can
+                //    padding left, right
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color(kGradientColorElement1),
+                      Color(kGradientColorElement2)
+                    ],
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
-                      ),
-                      onPressed: onBackwardPressed,
-                    ),
-                  ],
-                ),
-                Center(
-                  child: Container(
-                    width: 150.0,
-                    height: 150.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                      image: DecorationImage(
-                        image: AssetImage('images/default_app_avatar.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 50.0),
-                    child: Text(
-                      'Welcome to Retio',
-                      style: TextStyle(
-                        fontFamily: 'Pacifico',
-                        fontSize: kFontTextSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  child: TextField(
-                    style: TextStyle(
-                      fontSize: kFontTextSize,
-                    ),
-                    maxLength: 30,
-                    controller: _userNameController,
-                    decoration: InputDecoration(
-                      hintText: 'Username',
-                      hintStyle: TextStyle(
-                        fontSize: kFontLabelSize,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        letterSpacing: 0.5,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5),
+                    Center(
+                      child: Container(
+                        width: 150.0,
+                        height: 150.0,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black,
+                          image: DecorationImage(
+                            image: AssetImage('images/default_app_avatar.jpg'),
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                        borderSide: BorderSide.none,
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(vertical: 10.0),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  child: Stack(
-                    alignment: AlignmentDirectional.topEnd,
-                    children: <Widget>[
-                      TextField(
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20.0, bottom: 50.0),
+                        child: Text(
+                          'Welcome to Retio',
+                          style: TextStyle(
+                            fontFamily: 'Pacifico',
+                            fontSize: kFontTextSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.0),
+                      child: TextField(
                         style: TextStyle(
                           fontSize: kFontTextSize,
                         ),
-                        obscureText: _hidePassword,
                         maxLength: 30,
-                        controller: _passwordController,
+                        controller: _userNameController,
                         decoration: InputDecoration(
-                          hintText: 'Password',
+                          hintText: 'Username',
                           hintStyle: TextStyle(
                             fontSize: kFontLabelSize,
                             fontWeight: FontWeight.bold,
@@ -152,45 +108,79 @@ class _SignInScreenState extends State<SignInScreen> {
                               const EdgeInsets.symmetric(vertical: 10.0),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: onTogglePassword,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text(
-                            _hidePassword ? 'SHOW' : 'HIDE',
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.0),
+                      child: Stack(
+                        alignment: AlignmentDirectional.topEnd,
+                        children: <Widget>[
+                          TextField(
                             style: TextStyle(
-                              color: Color(kGradientColorElement1),
                               fontSize: kFontTextSize,
-                              fontWeight: FontWeight.bold,
+                            ),
+                            obscureText: _hidePassword,
+                            maxLength: 30,
+                            controller: _passwordController,
+                            decoration: InputDecoration(
+                              hintText: 'Password',
+                              hintStyle: TextStyle(
+                                fontSize: kFontLabelSize,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                                letterSpacing: 0.5,
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                                borderSide: BorderSide.none,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
                             ),
                           ),
+                          GestureDetector(
+                            onTap: onTogglePassword,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Text(
+                                _hidePassword ? 'SHOW' : 'HIDE',
+                                style: TextStyle(
+                                  color: Color(kGradientColorElement1),
+                                  fontSize: kFontTextSize,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 50.0,
+                      child: RaisedGradientButton(
+                        borderRadius: BorderRadius.circular(30.0),
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(kGradientColorElement1),
+                            Color(kGradientColorElement2),
+                          ],
+                        ),
+                        onPressed: onSignInPressed,
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: kFontTextSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50.0,
-                  child: RaisedGradientButton(
-                    borderRadius: BorderRadius.circular(30.0),
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(kGradientColorElement1),
-                        Color(kGradientColorElement2),
-                      ],
-                    ),
-                    onPressed: onSignInPressed,
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: kFontTextSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
 //                  child: RawMaterialButton(
 //                    shape: RoundedRectangleBorder(
 //                      borderRadius: BorderRadius.circular(10.0),
@@ -207,24 +197,24 @@ class _SignInScreenState extends State<SignInScreen> {
 //                      textAlign: TextAlign.center,
 //                    ),
 //                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: GestureDetector(
-                      onTap: onForgotPasswordPressed,
-                      child: Text(
-                        'Forgot password.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: kFontLabelSize,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: GestureDetector(
+                          onTap: onForgotPasswordPressed,
+                          child: Text(
+                            'Forgot password.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: kFontLabelSize,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
 //            Padding(
 //              padding: const EdgeInsets.symmetric(vertical: 20.0),
 //              child: Row(
@@ -245,6 +235,22 @@ class _SignInScreenState extends State<SignInScreen> {
 //                ],
 //              ),
 //            )
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                  onPressed: onBackwardPressed,
+                ),
               ],
             ),
           ),
@@ -264,12 +270,7 @@ class _SignInScreenState extends State<SignInScreen> {
       isLoading = true;
     });
 
-    var data = await JsonGetter(jsonNameFile: 'data/login.json').loadData();
-    // Dong data nay de truyen sang User_Screen
-    var fullNameData =
-        await JsonGetter(jsonNameFile: 'data/signup.json').loadData();
-    String fullName =
-        fullNameData['firstname'] + ' ' + fullNameData['lastname'];
+    final data = await JsonGetter(jsonFileName: 'data/login.json').loadData();
 
     if (data != null) {
       if (_userNameController.text.compareTo(data['username']) == 0) {
@@ -285,6 +286,12 @@ class _SignInScreenState extends State<SignInScreen> {
       }
 
       if (_userNameValid && _passwordValid) {
+        // Dong data nay de truyen sang User_Screen
+        final fullNameData =
+            await JsonGetter(jsonFileName: 'data/signup.json').loadData();
+        String fullName =
+            fullNameData['firstname'] + ' ' + fullNameData['lastname'];
+
         isLoading = await Navigator.push(
           context,
           MaterialPageRoute(
@@ -293,22 +300,24 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
         );
-
-        setState(() {
-          isLoading = false;
-        });
       } else {
         ReusableAlert(
           context: context,
           title: 'Not exist',
           desc: 'Your account is not exist',
         ).getAlert();
-
-        setState(() {
-          isLoading = false;
-        });
       }
+    } else {
+      ReusableAlert(
+        context: context,
+        title: 'Internet problems',
+        desc: 'Your internet has problem',
+      ).getAlert();
     }
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void onBackwardPressed() {

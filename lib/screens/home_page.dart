@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/screens/account_screen.dart';
 import 'package:rentio/screens/category_screen.dart';
+import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
 
 import 'home_screen.dart';
@@ -20,45 +21,55 @@ class _HomePageState extends State<HomePage> {
     AccountScreen()
   ];
 
-  void onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rentio'),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: <Color>[
-                Color(0xFF191654),
-                Color(0xFF43C6AC),
+                Color(kGradientColorElement2),
+                Color(kGradientColorElement1),
               ],
             ),
           ),
         ),
-
-//         Flexible(
-//           child: TextField(
-//             //controller: editingController,
-//             decoration: InputDecoration(
-//               hintText: "Bạn cần tìm gì...",
-//               prefixIcon: Icon(Icons.search),
-//               border: OutlineInputBorder(
-//                 borderRadius: BorderRadius.all(
-//                   Radius.circular(25.0),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-
+        title: Row(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: Text(
+                'Rentio',
+              ),
+            ),
+            Flexible(
+              child: TextField(
+                style: TextStyle(
+                  fontSize: kFontLabelSize,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                //controller: editingController,
+                decoration: InputDecoration(
+                  hintText: "Bạn cần tìm gì...",
+                  hintStyle: TextStyle(
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  prefixIcon: Icon(Icons.search),
+//                  border: OutlineInputBorder(
+//                    borderRadius: BorderRadius.all(
+//                      Radius.circular(25.0),
+//                    ),
+//                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
         actions: <Widget>[
           IconButton(
             alignment: Alignment.centerRight,
@@ -100,6 +111,12 @@ class _HomePageState extends State<HomePage> {
         onTap: onItemTapped,
       ),
     );
+  }
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
   }
 }
 
