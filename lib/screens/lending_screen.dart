@@ -188,7 +188,14 @@ class _LendingScreenState extends State<LendingScreen> {
                 children: <Widget>[
                   Expanded(
                     child: RaisedButton(
-                      color: Colors.greenAccent,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        side: BorderSide(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                      ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         // > Phai su dung thuoc tinh 'mainAxisSize: MainAxisSize.min,'
@@ -207,17 +214,24 @@ class _LendingScreenState extends State<LendingScreen> {
                           ),
                           Icon(
                             FontAwesomeIcons.plus,
-                            size: 30.0,
+                            size: 20.0,
                             color: Colors.green,
                           ),
                         ],
                       ),
-                      onPressed: () {},
+                      onPressed: onAddPressed,
                     ),
                   ),
                   Expanded(
                     child: RaisedButton(
-                      color: Colors.redAccent,
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        side: BorderSide(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                      ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
@@ -231,12 +245,12 @@ class _LendingScreenState extends State<LendingScreen> {
                           ),
                           Icon(
                             FontAwesomeIcons.minus,
-                            size: 30.0,
+                            size: 20.0,
                             color: Colors.red,
                           ),
                         ],
                       ),
-                      onPressed: () {},
+                      onPressed: onRemovePressed,
                     ),
                   ),
                 ],
@@ -266,4 +280,8 @@ class _LendingScreenState extends State<LendingScreen> {
   void onBackwardPressed() {
     Navigator.pop(context, false);
   }
+
+  void onAddPressed() {}
+
+  void onRemovePressed() {}
 }

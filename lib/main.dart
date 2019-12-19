@@ -4,6 +4,7 @@ import 'package:rentio/screens/category_screen.dart';
 import 'package:rentio/screens/home_page.dart';
 import 'package:rentio/screens/home_screen.dart';
 import 'package:rentio/screens/lending_screen.dart';
+import 'package:rentio/screens/list_items_screen.dart';
 import 'package:rentio/screens/notification_screen.dart';
 import 'package:rentio/screens/product_detail_screen.dart';
 import 'package:rentio/screens/signin_screen.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         CategoryScreen.routeName: (context) => CategoryScreen(),
         NotificationScreen.routeName: (context) => NotificationScreen(),
         ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
+        ListItemsScreen.routeName: (context) => ListItemsScreen(),
       },
     );
   }

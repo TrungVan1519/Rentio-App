@@ -28,7 +28,12 @@ class ReusableItemCard extends StatelessWidget {
     //Check whether network image or asset image
     if (imageUrl.contains('http')) {
       return Flexible(
-        child: Image.network(imageUrl.toString()),
+        child: FittedBox(
+          child: Image.network(
+            imageUrl.toString(),
+            fit: BoxFit.cover,
+          ),
+        ),
       );
     }
     return Flexible(
@@ -39,25 +44,23 @@ class ReusableItemCard extends StatelessWidget {
   Widget getProductCard() {
     return ListTile(
       onTap: onPressed,
-      title: Card(
-        elevation: 5.0,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1.0,
-              color: Color(0xFFC0C0C0),
-            ),
+      title: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(
+            width: 1.0,
+            color: Color(0xFFC0C0C0),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              getImage(),
-              Text(productName.toString()),
-              Text(productAddress.toString()),
-              Text(price.toString()),
-            ],
-          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            getImage(),
+            Text(productName.toString()),
+            Text(productAddress.toString()),
+            Text(price.toString()),
+          ],
         ),
       ),
     );

@@ -4,6 +4,8 @@ import 'package:rentio/components/reusable_loading_card.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 
 class ListItemsScreen extends StatefulWidget {
+  static String routeName = "/ListItemScreen";
+
   final String title;
   final String jsonFileName;
   ListItemsScreen({this.title, this.jsonFileName});
@@ -16,6 +18,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
   var data;
 
   Future initJsonData() async {
+    print(data);
     return await JsonGetter(jsonFileName: widget.jsonFileName).loadData();
   }
 
@@ -37,6 +40,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
     initJsonData().then((result) {
       setState(() {
         data = result;
+        print('data2:$data');
       });
     });
   }
@@ -55,10 +59,11 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
           delegate: SliverChildBuilderDelegate(
             (context, index) => ReusableItemCard(
                 isProduct: true,
-                productName: data['products'][index]['name'],
-                price: data['products'][index]['daily_price'],
+                productName: /*data['products'][index]['name']*/ '123',
+                productAddress: 'abc',
+                price: /*data['products'][index]['daily_price']*/ 456,
                 imageUrl: 'https://www.w3schools.com/w3css/img_lights.jpg'),
-            childCount: data['products'].length,
+            childCount: /*data['products'].length*/ 3,
           ),
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
