@@ -4,8 +4,10 @@ class ReusablePersonCard extends StatelessWidget {
   final String personName;
   final double personRating;
   final String imageUrl;
+  final Function onPressed;
 
-  ReusablePersonCard({this.personName, this.personRating, this.imageUrl});
+  ReusablePersonCard(
+      {this.personName, this.personRating, this.imageUrl, this.onPressed});
 
   Widget getImage() {
     //Check whether network image or asset image
@@ -22,22 +24,18 @@ class ReusablePersonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onPressed,
       title: Card(
         elevation: 5.0,
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1.0,
-              color: Color(0xFFC0C0C0),
-            ),
-          ),
-          child: Column(
-            children: <Widget>[
-              getImage(),
-              Text(personName.toString()),
-              Text(personRating.toString() + '/5.0'),
-            ],
-          ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Column(
+          children: <Widget>[
+            getImage(),
+            Text(personName.toString()),
+            Text(personRating.toString() + '/5.0'),
+          ],
         ),
       ),
     );

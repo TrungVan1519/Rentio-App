@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
+import 'package:rentio/screens/list_items_screen.dart';
+import 'package:rentio/screens/product_list.dart';
 import 'package:rentio/services/search_engine.dart';
 import 'package:rentio/utilities/constants.dart';
+import 'package:rentio/utilities/try_new_widget.dart';
 
 class CategoryScreen extends StatefulWidget {
   static String routeName = 'categoryScreen';
@@ -106,6 +109,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
               (context, index) {
                 return ReusableItemCard(
                   isProduct: false,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductListScreen(
+                          title: '',
+                          jsonFileName: 'data/product_based_on_catalog.json',
+                        ),
+                      ),
+                    );
+                  },
                   catalogName: jsonData['catalogs'][index]['type'],
                   imageUrl:
                       'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
@@ -126,43 +140,3 @@ class _CategoryScreenState extends State<CategoryScreen> {
     );
   }
 }
-
-// child: GridView.builder(
-//         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//           crossAxisCount: 3,
-//         ),
-//         itemCount: 5,
-//         itemBuilder: (context, index) {
-//           //print(jsonData);
-//           while (jsonData == null) {
-//             Center(
-//               child: CircularProgressIndicator(),
-//             );
-//           }
-
-//           return ReusableItemCard(
-//             productName: jsonData['catalogs'][index]['type'],
-//             imageUrl:
-//                 'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
-//           );
-//         },
-//       ),
-
-// FutureBuilder(
-//         future: DefaultAssetBundle.of(context).loadString('data/catalog.json'),
-//         builder: (context, snapshot) {
-//           var jsonData = jsonDecode(snapshot.data.toString());
-//           print(jsonData);
-
-//           return ListView.builder(
-//             itemBuilder: (context, index) {
-//               return ReusableItemCard(
-//                 productName: jsonData[index]['type'],
-//                 imageUrl:
-//                     'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
-//               );
-//             },
-//             itemCount: jsonData == null ? 0 : jsonData.length,
-//           );
-//         },
-//       ),

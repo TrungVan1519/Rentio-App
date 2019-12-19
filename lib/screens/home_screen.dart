@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/screens/product_detail_screen.dart';
+import 'package:rentio/screens/see_more_screen.dart';
 import 'package:rentio/services/search_engine.dart';
 import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/components/reusable_person_card.dart';
@@ -108,30 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          // SliverToBoxAdapter(
-          //   child: Container(
-          //     height: 200.0,
-          //     child: ListView.builder(
-          //       scrollDirection: Axis.horizontal,
-          //       itemCount: popularProductData['products'].length,
-          //       itemBuilder: (context, index) {
-          //         return Padding(
-          //           padding: const EdgeInsets.all(8.0),
-          //           child: ReusableItemCard(
-          //             isProduct: true,
-          //             productName: popularProductData['products'][index]['name'],
-          //             productAddress: popularProductData['products'][index]
-          //                 ['address'],
-          //             price: popularProductData['products'][index]['daily_price'],
-          //             imageUrl:
-          //                 'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
-          //           ),
-          //         );
-          //       },
-          //     ),
-          //   ),
-          // ),
-
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
@@ -145,6 +123,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     price: popularProductData['products'][index]['daily_price'],
                     imageUrl:
                         'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetailScreen(),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
@@ -164,7 +150,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 40.0),
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SeeMoreScreen(
+                                type: 'product',
+                                jsonData: popularProductData,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Xem them',
                           style: TextStyle(
@@ -225,7 +221,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.only(right: 40.0),
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SeeMoreScreen(
+                                type: 'lenders',
+                                jsonData: topLenderData,
+                              ),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Xem them',
                           style: TextStyle(

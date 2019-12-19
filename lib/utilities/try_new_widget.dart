@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyTestWidget extends StatefulWidget {
+  static String routeName = 'myTestWidget';
   @override
   _MyTestWidgetState createState() => _MyTestWidgetState();
 }
@@ -10,25 +11,28 @@ class _MyTestWidgetState extends State<MyTestWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        FlatButton(
-          child: Text('Push me!'),
-          onPressed: () {
-            setState(() {
-              myList.add('newText');
-            });
-          },
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: myList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Text(myList[index]);
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: <Widget>[
+          FlatButton(
+            child: Text('Push me!'),
+            onPressed: () {
+              setState(() {
+                myList.add('newText');
+              });
             },
           ),
-        ),
-      ],
+          Expanded(
+            child: ListView.builder(
+              itemCount: myList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Text(myList[index]);
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
