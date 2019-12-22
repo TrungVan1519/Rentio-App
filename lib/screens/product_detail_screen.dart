@@ -209,10 +209,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ],
                       ),
-                      priceAndDateCard(widget.jsonData['daily_price'], 'ngày'),
-                      priceAndDateCard(widget.jsonData['weekly_price'], 'tuần'),
-                      priceAndDateCard(
-                          widget.jsonData['monthly_price'], 'tháng'),
+                      priceAndDateCard(150000, 'ngày'),
+                      priceAndDateCard(150000, 'tuần'),
+                      priceAndDateCard(150000, 'tháng'),
                     ],
                   ),
                 ),

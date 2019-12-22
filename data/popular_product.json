@@ -4,11 +4,9 @@
       "id": 1,
       "name": "Racket",
       "status": true,
-      "price": {
-        "daily": 0.99,
-        "weekly": 2.0,
-        "monthly": 4.0
-      },
+      "daily_price": 0.99,
+      "weekly_price": 2.0,
+      "monthly_price": 4.0,
       "img_vid": "http://0.0.0.0:8080/<username>/<name>/"
     },
     {
