@@ -1,0 +1,124 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Racket",
+      "status": true,
+      "daily_price": 0.99,
+      "weekly_price": 2.0,
+      "monthly_price": 4.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Scissor",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 2
+    },
+    {
+      "id": 3,
+      "name": "Ball",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 4,
+      "name": "Exploding Kittens",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 5,
+      "name": "Splendor",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 6,
+      "name": "Vacuum cleaner",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 7,
+      "name": "Wood cutter",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 8,
+      "name": "Book",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 9,
+      "name": "Book 2",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 10,
+      "name": "Book 3",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 11,
+      "name": "Book 4",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    },
+    {
+      "id": 12,
+      "name": "Book 4",
+      "status": false,
+      "daily_price": 1.99,
+      "weekly_price": 3.0,
+      "monthly_price": 5.0,
+      "img_vid": "http://0.0.0.0:8080/<username>/<name>/",
+      "user_id": 1
+    }
+  ]
+}
