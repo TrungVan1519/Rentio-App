@@ -7,6 +7,9 @@ import 'package:rentio/screens/notification_screen.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
 
+import '../data_models/product_in_stock.dart';
+import '../data_models/product_in_stock.dart';
+import '../local_json_getter/sign_in_json_getter.dart';
 import 'home_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +26,33 @@ class _HomePageState extends State<HomePage> {
     AccountScreen()
   ];
 
+  var jsonData;
+
+  Future getInitProductData() async {
+    return await JsonGetter(jsonFileName: 'data/get_all_products.json')
+        .loadData();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getInitProductData().then((result) {
+      jsonData = result;
+    }).then((_) {
+      for (int i = 0; i < jsonData['products'].length; i++) {
+        productInStockList.add(ProductInStock(
+          id: jsonData['products'][i]['id'],
+          name: jsonData['products'][i]['name'],
+          status: jsonData['products'][i]['status'],
+          daily_price: jsonData['products'][i]['daily_price'],
+          weekly_price: jsonData['products'][i]['weekly_price'],
+          monthly_price: jsonData['products'][i]['monthly_price'],
+          user_id: jsonData['products'][i]['user_id'],
+        ));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,11 +68,11 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
-            title: Text('Business'),
+            title: Text('Category'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),
-            title: Text('School'),
+            title: Text('Notification'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),

@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
+import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
@@ -16,6 +17,7 @@ final List<String> imgList = [
   'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80',
 ];
 
+// map function is used for map a list of function (function is based on your call)
 List<T> map<T>(List list, Function handler) {
   List<T> result = [];
   for (var i = 0; i < list.length; i++) {
@@ -24,6 +26,7 @@ List<T> map<T>(List list, Function handler) {
   return result;
 }
 
+//use the map function to map list of items with function on your call, after the loop it will convert to a list (.toList())
 final List child = map<Widget>(
   imgList,
   (index, i) {
@@ -39,16 +42,34 @@ final List child = map<Widget>(
 
 class ProductDetailScreen extends StatefulWidget {
   static String routeName = 'productDetailScreen';
+  var jsonData;
+
+  ProductDetailScreen({this.jsonData});
 
   @override
   _ProductDetailScreenState createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  int current = 0;
+  int currentImage = 0;
+  DateTime dateTime;
+  //valid date example: 1999/04/08
+  String startDate = 'Pick your date';
+  int startDay;
+  int startMonth;
+  int startYear;
+  String endDate = 'Pick your date';
+  int endDay;
+  int endMonth;
+  int endYear;
+  int totalPrice = 0;
+  int dateDiff;
+  DateTime startDateInDateTime;
+  DateTime endDateInDateTime;
 
   @override
   void initState() {
+    dateTime = DateTime.now();
     super.initState();
   }
 
@@ -76,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             aspectRatio: 2.0,
             onPageChanged: (index) {
               setState(() {
-                current = index;
+                currentImage = index;
               });
             },
           ),
@@ -91,7 +112,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: current == index
+                      color: currentImage == index
                           ? Color.fromRGBO(0, 0, 0, 0.9)
                           : Color.fromRGBO(0, 0, 0, 0.4)),
                 );
@@ -194,6 +215,74 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ],
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12.0,
+                    vertical: 10.0,
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Start time: ',
+                            style: TextStyle(
+                              fontSize: kFontProductPriceSize,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              showCalendar('start');
+                            },
+                            child: Text(
+                              startDate,
+                              style: TextStyle(
+                                fontSize: kFontProductPriceSize,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'End time: ',
+                            style: TextStyle(
+                              fontSize: kFontProductPriceSize,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              showCalendar('end');
+                            },
+                            child: Text(
+                              endDate,
+                              style: TextStyle(
+                                fontSize: kFontProductPriceSize,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            'Total price: $totalPrice đ',
+                            style: TextStyle(
+                              fontSize: kFontProductPriceSize,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: 50.0,
                 ),
@@ -228,11 +317,49 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
-  void onRentButtonPressed(BuildContext context) {
-    //valid date: 1999/04/08
-    String startDate = '';
-    String endDate = '';
+  void showCalendar(String dateFrom) async {
+    DateTime newDateTime = await showRoundedDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(DateTime.now().year - 1),
+      lastDate: DateTime(DateTime.now().year + 2),
+      borderRadius: 2,
+    );
+    if (newDateTime != null) {
+      setState(
+        () {
+          if (dateFrom == 'start') {
+            startDateInDateTime = newDateTime;
+            dateTime = newDateTime;
+            startDay = newDateTime.day;
+            startMonth = newDateTime.month;
+            startYear = newDateTime.year;
+            startDate = startDay.toString() +
+                '/' +
+                startMonth.toString() +
+                '/' +
+                startYear.toString();
+          } else {
+            endDateInDateTime = newDateTime;
+            dateTime = newDateTime;
+            endDay = newDateTime.day;
+            endMonth = newDateTime.month;
+            endYear = newDateTime.year;
+            endDate = endDay.toString() +
+                '/' +
+                endMonth.toString() +
+                '/' +
+                endYear.toString();
+            dateDiff =
+                endDateInDateTime.difference(startDateInDateTime).inDays + 2;
+            print(dateDiff);
+          }
+        },
+      );
+    }
+  }
 
+  void onRentButtonPressed(BuildContext context) {
     Alert(
       style: AlertStyle(
         titleStyle: TextStyle(
@@ -245,31 +372,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         isCloseButton: false,
       ),
       context: context,
-      title: "Please select your rental start and end time.",
-      content: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('Start time: '),
-              Text(startDate),
-              RaisedButton(
-                onPressed: () {},
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text('End time: '),
-              Text(endDate),
-              RaisedButton(
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ],
-      ),
+      title: "Do you want to start renting now?",
       buttons: [
         DialogButton(
           child: Text(
@@ -280,7 +383,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ),
           onPressed: () {},
-          width: 100,
+          width: 80,
         ),
         DialogButton(
           child: Text(
@@ -291,11 +394,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ),
           onPressed: () => Navigator.pop(context),
-          width: 100,
+          width: 80,
         ),
       ],
     ).show();
   }
+
+  void calculatePrice() {}
 
   Widget priceAndDateCard(double price, String dateType) {
     int priceInInt = price.toInt();
