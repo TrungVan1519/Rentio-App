@@ -6,7 +6,7 @@ import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/components/reusable_loading_card.dart';
 import 'package:rentio/global_data/global_user.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
-import 'package:rentio/network/http.dart';
+import 'package:rentio/services/http_executioner.dart';
 import 'package:rentio/screens/user_screen.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:http/http.dart' as http;

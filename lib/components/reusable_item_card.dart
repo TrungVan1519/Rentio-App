@@ -28,12 +28,12 @@ class ReusableItemCard extends StatelessWidget {
     //Check whether network image or asset image
     if (imageUrl.contains('http')) {
       return Flexible(
-        child: FittedBox(
-          child: Image.network(
-            imageUrl.toString(),
-            fit: BoxFit.cover,
-          ),
+//        child: FittedBox(
+        child: Image.network(
+          imageUrl.toString(),
+          //fit: BoxFit.cover,
         ),
+//        ),
       );
     }
     return Flexible(

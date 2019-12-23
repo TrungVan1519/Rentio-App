@@ -31,6 +31,7 @@ dependencies:
   flutter_rating_bar: ^3.0.0
   date_range_picker: ^1.0.6
   flutter_rounded_date_picker: ^0.3.0
+  http: ^0.12.0+2
 
 dev_dependencies:
   flutter_test:
