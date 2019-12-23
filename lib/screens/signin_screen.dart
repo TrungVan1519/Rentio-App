@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/components/reusable_loading_card.dart';
+import 'package:rentio/global_data/global_user.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
+import 'package:rentio/network/http.dart';
 import 'package:rentio/screens/user_screen.dart';
 import 'package:rentio/utilities/constants.dart';
+import 'package:http/http.dart' as http;
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -270,25 +275,62 @@ class _SignInScreenState extends State<SignInScreen> {
       isLoading = true;
     });
 
-    final data = await JsonGetter(jsonFileName: 'data/login.json').loadData();
+    // http://192.168.2.107:8080/auth
+    http.Response responsePost = await HttpExecutioner.post(
+      requestURL: 'http://192.168.2.107:8080/auth',
+      headers: {"content-type": "application/json"},
+      body: {
+        "username": _userNameController.text,
+        "password": _passwordController.text
+      },
+    );
+//
+//    for (var i in responsePost.headers.keys) {
+//      print(i);
+//    }
 
-    if (data != null) {
-      if (_userNameController.text.compareTo(data['username']) == 0) {
-        _userNameValid = true;
-      } else {
-        _userNameValid = false;
-      }
+    if (responsePost.statusCode == 200) {
+      final data = json.decode(responsePost.body);
 
-      if (_passwordController.text.compareTo(data['password']) == 0) {
-        _passwordValid = true;
-      } else {
-        _passwordValid = false;
-      }
+      GlobalUser.globalUser.id = data['access_token'];
+      GlobalUser.globalUser.userName = _userNameController.text;
+      print(GlobalUser.globalUser.id);
+      print(GlobalUser.globalUser.userName);
+
+      _userNameValid = true;
+      _passwordValid = true;
+
+//    final data = await JsonGetter(jsonFileName: 'data/login.json').loadData();
+//
+//    if (data != null) {
+//      if (_userNameController.text.compareTo(data['username']) == 0) {
+//        _userNameValid = true;
+//      } else {
+//        _userNameValid = false;
+//      }
+//
+//      if (_passwordController.text.compareTo(data['password']) == 0) {
+//        _passwordValid = true;
+//      } else {
+//        _passwordValid = false;
+//      }
 
       if (_userNameValid && _passwordValid) {
-        // Dong data nay de truyen sang User_Screen
-        final fullNameData =
-            await JsonGetter(jsonFileName: 'data/signup.json').loadData();
+        // Dong data nay de truyen sang UserScreen
+//        final fullNameData =
+//            await JsonGetter(jsonFileName: 'data/signup.json').loadData();
+
+        // http://192.168.2.107:8080/user/<username>
+        http.Response responseGet = await HttpExecutioner.get(
+          requestURL:
+              'http://192.168.2.107:8080/user/${GlobalUser.globalUser.userName}',
+          headers: {
+            "content-type": "application/json",
+            'authorization': 'JWT ${GlobalUser.globalUser.id}'
+          },
+        );
+        final fullNameData = json.decode(responseGet.body);
+
         String fullName =
             fullNameData['firstname'] + ' ' + fullNameData['lastname'];
 
