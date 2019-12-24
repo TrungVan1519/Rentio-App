@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
+import 'package:rentio/services/http_executioner.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/services/regex_validation.dart';
+import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -31,16 +33,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
+//        color: Colors.white,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(kGradientColorElement1),
-              Color(kGradientColorElement2)
-            ],
+          image: DecorationImage(
+            image: AssetImage('images/sign_in.jpg'),
+            fit: BoxFit.cover,
           ),
         ),
+//        decoration: BoxDecoration(
+//          gradient: LinearGradient(
+//            begin: Alignment.topRight,
+//            end: Alignment.bottomLeft,
+//            colors: [
+//              Color(kGradientColorElement1),
+//              Color(kGradientColorElement2)
+//            ],
+//          ),
+//        ),
         child: Stack(
           children: <Widget>[
             Container(
@@ -70,14 +79,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       maxLength: 30,
                       controller: _userNameController,
+//                      decoration: InputDecoration(
+//                        labelText: 'Username (6-30)',
+//                        labelStyle: TextStyle(
+//                          color: Colors.white,
+//                          fontSize: kFontLabelSize,
+//                          fontWeight: FontWeight.bold,
+//                          letterSpacing: 0.5,
+//                        ),
+//                        errorText: _userNameValid ? null : _userNameError,
+//                      ),
                       decoration: InputDecoration(
-                        labelText: 'Username (6-30)',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
+                        hintText: 'Username (6-30)',
+                        hintStyle: TextStyle(
                           fontSize: kFontLabelSize,
                           fontWeight: FontWeight.bold,
+                          color: Colors.grey,
                           letterSpacing: 0.5,
                         ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 10.0),
                         errorText: _userNameValid ? null : _userNameError,
                       ),
                     ),
@@ -90,14 +119,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       maxLength: 30,
                       controller: _passwordController,
+//                      decoration: InputDecoration(
+//                        labelText: 'Password (6-30)',
+//                        labelStyle: TextStyle(
+//                          color: Colors.white,
+//                          fontSize: kFontLabelSize,
+//                          fontWeight: FontWeight.bold,
+//                          letterSpacing: 0.5,
+//                        ),
+//                        errorText: _passwordValid ? null : _passwordError,
+//                      ),
                       decoration: InputDecoration(
-                        labelText: 'Password (6-30)',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
+                        hintText: 'Password (6-30)',
+                        hintStyle: TextStyle(
                           fontSize: kFontLabelSize,
                           fontWeight: FontWeight.bold,
+                          color: Colors.grey,
                           letterSpacing: 0.5,
                         ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 10.0),
                         errorText: _passwordValid ? null : _passwordError,
                       ),
                     ),
@@ -110,14 +159,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       maxLength: 30,
                       controller: _fullNameController,
+//                      decoration: InputDecoration(
+//                        labelText: 'Full name (5-30)',
+//                        labelStyle: TextStyle(
+//                          color: Colors.white,
+//                          fontSize: kFontLabelSize,
+//                          fontWeight: FontWeight.bold,
+//                          letterSpacing: 0.5,
+//                        ),
+//                        errorText: _fullNameValid ? null : _fullNameError,
+//                      ),
                       decoration: InputDecoration(
-                        labelText: 'Full name (5-30)',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
+                        hintText: 'Full name (5-30)',
+                        hintStyle: TextStyle(
                           fontSize: kFontLabelSize,
                           fontWeight: FontWeight.bold,
+                          color: Colors.grey,
                           letterSpacing: 0.5,
                         ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 10.0),
                         errorText: _fullNameValid ? null : _fullNameError,
                       ),
                     ),
@@ -130,14 +199,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       maxLength: 30,
                       controller: _phoneNumberController,
+//                      decoration: InputDecoration(
+//                        labelText: 'Phone number (9-30)',
+//                        labelStyle: TextStyle(
+//                          color: Colors.white,
+//                          fontSize: kFontLabelSize,
+//                          fontWeight: FontWeight.bold,
+//                          letterSpacing: 0.5,
+//                        ),
+//                        errorText: _phoneNumberValid ? null : _phoneNumberError,
+//                      ),
                       decoration: InputDecoration(
-                        labelText: 'Phone number (9-30)',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
+                        hintText: 'Phone number (9-30)',
+                        hintStyle: TextStyle(
                           fontSize: kFontLabelSize,
                           fontWeight: FontWeight.bold,
+                          color: Colors.grey,
                           letterSpacing: 0.5,
                         ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 10.0),
                         errorText: _phoneNumberValid ? null : _phoneNumberError,
                       ),
                     ),
@@ -150,14 +239,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       maxLength: 30,
                       controller: _emailController,
+//                      decoration: InputDecoration(
+//                        labelText: 'Email (@gmail.com)',
+//                        labelStyle: TextStyle(
+//                          color: Colors.white,
+//                          fontSize: kFontLabelSize,
+//                          fontWeight: FontWeight.bold,
+//                          letterSpacing: 0.5,
+//                        ),
+//                        errorText: _emailValid ? null : _emailError,
+//                      ),
                       decoration: InputDecoration(
-                        labelText: 'Email (@gmail.com)',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
+                        hintText: 'Email (@gmail.com)',
+                        hintStyle: TextStyle(
                           fontSize: kFontLabelSize,
                           fontWeight: FontWeight.bold,
+                          color: Colors.grey,
                           letterSpacing: 0.5,
                         ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 10.0),
                         errorText: _emailValid ? null : _emailError,
                       ),
                     ),
@@ -231,46 +340,66 @@ class _SignUpScreenState extends State<SignUpScreen> {
     Navigator.pop(context);
   }
 
-  void onSignUpPressed() {
-    setState(() {
+  void onSignUpPressed() async {
+    setState(() async {
       RegexModel regexModel = new RegexModel();
 
       // check username
       if (_userNameController.text.length >= 6 &&
           regexModel.isAllNormalCharaters(_userNameController.text)) {
-        _userNameValid = true;
+        setState(() {
+          _userNameValid = true;
+        });
       } else {
-        _userNameValid = false;
+        setState(() {
+          _userNameValid = false;
+        });
       }
 
       // check password
       if (_passwordController.text.length >= 6 &&
           regexModel.isAllNormalCharaters(_passwordController.text)) {
-        _passwordValid = true;
+        setState(() {
+          _passwordValid = true;
+        });
       } else {
-        _passwordValid = false;
+        setState(() {
+          _passwordValid = false;
+        });
       }
 
       // check fullname
       if (_fullNameController.text.length >= 5) {
-        _fullNameValid = true;
+        setState(() {
+          _fullNameValid = true;
+        });
       } else {
-        _fullNameValid = false;
+        setState(() {
+          _fullNameValid = false;
+        });
       }
 
       // check phonenumber
       if (_phoneNumberController.text.length >= 9 &&
           regexModel.isAllNumber(_phoneNumberController.text)) {
-        _phoneNumberValid = true;
+        setState(() {
+          _phoneNumberValid = true;
+        });
       } else {
-        _phoneNumberValid = false;
+        setState(() {
+          _phoneNumberValid = false;
+        });
       }
 
       // check email
       if (regexModel.isValidEmail(_emailController.text)) {
-        _emailValid = true;
+        setState(() {
+          _emailValid = true;
+        });
       } else {
-        _emailValid = false;
+        setState(() {
+          _emailValid = false;
+        });
       }
 
       if (_userNameValid &&
@@ -278,11 +407,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _fullNameValid &&
           _phoneNumberValid &&
           _emailValid) {
-        ReusableAlert(
-                context: context,
-                title: 'Conpleted',
-                desc: 'Your account was created completed')
-            .getAlert();
+        http.Response responsePost = await HttpExecutioner.post(
+          requestURL: 'http://192.168.2.107:8080/register',
+          headers: {"content-type": "application/json"},
+          body: {
+            'first_name': _fullNameController.text.split(' ')[0] +
+                _fullNameController.text.split(' ')[1],
+            'last_name': _fullNameController.text.split(' ')[2],
+            'phone': _phoneNumberController.text,
+            'email': _emailController.text,
+            "username": _userNameController.text,
+            "password": _passwordController.text
+          },
+        );
+        if (responsePost.statusCode == 201) {
+          ReusableAlert(
+            context: context,
+            title: 'Conpleted',
+            desc: 'Your account was created completed',
+          ).getAlert();
+        } else {
+          ReusableAlert(
+            context: context,
+            title: 'Uncompleted',
+            desc: 'Your account was created fail',
+          ).getAlert();
+        }
       }
     });
   }

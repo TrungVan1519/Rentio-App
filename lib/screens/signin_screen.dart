@@ -5,7 +5,6 @@ import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/components/reusable_loading_card.dart';
 import 'package:rentio/global_data/global_user.dart';
-import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 import 'package:rentio/services/http_executioner.dart';
 import 'package:rentio/screens/user_screen.dart';
 import 'package:rentio/utilities/constants.dart';
@@ -44,14 +43,20 @@ class _SignInScreenState extends State<SignInScreen> {
                 // > padding toan bo Widgets con theo left right, top, bottom
                 // > Cac Widgets con chi can padding top, bottom voi nhau ma khong can
                 //    padding left, right
+//                decoration: BoxDecoration(
+//                  gradient: LinearGradient(
+//                    begin: Alignment.topRight,
+//                    end: Alignment.bottomLeft,
+//                    colors: [
+//                      Color(kGradientColorElement1),
+//                      Color(kGradientColorElement2)
+//                    ],
+//                  ),
+//                ),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Color(kGradientColorElement1),
-                      Color(kGradientColorElement2)
-                    ],
+                  image: DecorationImage(
+                    image: AssetImage('images/sign_in.jpg'),
+                    fit: BoxFit.cover,
                   ),
                 ),
                 child: Column(
@@ -284,7 +289,6 @@ class _SignInScreenState extends State<SignInScreen> {
         "password": _passwordController.text
       },
     );
-//
 //    for (var i in responsePost.headers.keys) {
 //      print(i);
 //    }
@@ -294,8 +298,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
       GlobalUser.globalUser.id = data['access_token'];
       GlobalUser.globalUser.userName = _userNameController.text;
-      print(GlobalUser.globalUser.id);
-      print(GlobalUser.globalUser.userName);
+      print('GlobalUser.globalUser.id' + GlobalUser.globalUser.id);
+      print(
+          'GlobalUser.globalUser.userName: ${GlobalUser.globalUser.userName}');
 
       _userNameValid = true;
       _passwordValid = true;
@@ -329,10 +334,11 @@ class _SignInScreenState extends State<SignInScreen> {
             'authorization': 'JWT ${GlobalUser.globalUser.id}'
           },
         );
+
         final fullNameData = json.decode(responseGet.body);
 
         String fullName =
-            fullNameData['firstname'] + ' ' + fullNameData['lastname'];
+            fullNameData['first_name'] + ' ' + fullNameData['last_name'];
 
         isLoading = await Navigator.push(
           context,
@@ -360,6 +366,51 @@ class _SignInScreenState extends State<SignInScreen> {
     setState(() {
       isLoading = false;
     });
+
+//    http.Response responsePost = await HttpExecutioner.post(
+//      requestURL: 'http://192.168.2.107:8080/auth',
+//      headers: {"content-type": "application/json"},
+//      body: {
+//        "username": _userNameController.text,
+//        "password": _passwordController.text
+//      },
+//    );
+//    final data = json.decode(responsePost.body);
+//
+//    if (responsePost.statusCode == 200) {
+//      GlobalUser.globalUser.id = data['access_token'];
+//      GlobalUser.globalUser.userName = _userNameController.text;
+//      print('GlobalUser.globalUser.id' + GlobalUser.globalUser.id);
+//      print(
+//          'GlobalUser.globalUser.userName: ${GlobalUser.globalUser.userName}');
+//
+//      http.Response responseGet = await HttpExecutioner.get(
+//        requestURL:
+//            'http://192.168.2.107:8080/user/${GlobalUser.globalUser.userName}',
+//        headers: {
+//          "content-type": "application/json",
+//          'authorization': 'JWT ${GlobalUser.globalUser.id}'
+//        },
+//      );
+//      if (responseGet.statusCode == 200) {
+//        final fullNameData = json.decode(responseGet.body);
+//        String fullName =
+//            fullNameData['first_name'] + ' ' + fullNameData['last_name'];
+//        print('fullName: $fullName');
+//
+//        Navigator.push(
+//          context,
+//          MaterialPageRoute(
+//              builder: (context) => UserScreen(fullName: fullName)),
+//        );
+//      }
+//    } else {
+//      ReusableAlert(
+//        context: context,
+//        title: 'Error',
+//        desc: data['description'],
+//      ).getAlert();
+//    }
   }
 
   void onBackwardPressed() {

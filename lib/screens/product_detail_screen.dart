@@ -93,9 +93,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         children: <Widget>[
           CarouselSlider(
             enableInfiniteScroll: false,
+            // Su dung items: child roi thi tu dong slide duoc anh
             items: child,
             aspectRatio: 2.0,
             onPageChanged: (index) {
+              // Dung de thay doi may cai dau '.' o duoi image
               setState(() {
                 currentImage = index;
               });
@@ -249,7 +251,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Row(
                         children: <Widget>[
                           Text(
-                            'End time: ',
+                            'End time  : ',
                             style: TextStyle(
                               fontSize: kFontProductPriceSize,
                             ),

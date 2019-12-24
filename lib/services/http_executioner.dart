@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:rentio/global_data/global_user.dart';
-import 'package:rentio/global_data/global_user.dart';
 
 class HttpExecutioner {
   static Future<dynamic> post(
