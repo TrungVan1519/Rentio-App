@@ -39,7 +39,9 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
       if (responseGetOrder.statusCode == 200) {
 //        List<int> idProductList = await
 
-        http.Response responseGetProduct = await HttpExecutioner.get(requestURL: ,);
+        http.Response responseGetProduct = await HttpExecutioner.get(
+          requestURL: "",
+        );
 
         ReusableAlert(
           context: context,

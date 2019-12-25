@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ReusablePersonCard extends StatelessWidget {
   final String personName;
-  final double personRating;
+  final int personRating;
   final String imageUrl;
   final Function onPressed;
 
@@ -34,7 +34,8 @@ class ReusablePersonCard extends StatelessWidget {
           children: <Widget>[
             getImage(),
             Text(personName.toString()),
-            Text(personRating.toString() + '/5.0'),
+            //Tam thoi nhan gia tri rating la int roi convert ra double
+            Text(personRating.toDouble().toString() + '/5.0'),
           ],
         ),
       ),

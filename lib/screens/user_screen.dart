@@ -8,6 +8,7 @@ import 'package:rentio/screens/lending_screen.dart';
 import 'package:rentio/screens/list_items_screen.dart';
 import 'package:rentio/screens/updating_account_info_screen.dart';
 import 'package:rentio/screens/updating_user_info_screen.dart';
+import 'package:rentio/services/noti_listener.dart';
 import 'package:rentio/utilities/constants.dart';
 
 class UserScreen extends StatefulWidget {
@@ -54,6 +55,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   void initState() {
     super.initState();
+    NotiListener.startListening();
     // (?? :)) ??) Chu y phai truyen tham so '_' vao ham '(_)'
     // Co tac dung chay ngay sau khi build xong cay UI (hay noi cach khac chay ngay
     //    sau khi ham override build chay xong)

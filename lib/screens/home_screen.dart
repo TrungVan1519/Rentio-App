@@ -145,12 +145,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: ReusableItemCard(
                     isProduct: true,
-                    productName: popularProductData['popular_products'][index]
-                        ['name'],
-                    productAddress: popularProductData['popular_products']
-                        [index]['address'],
-                    price: popularProductData['popular_products'][index]
-                        ['daily_price'],
+                    productName: popularProductData['products'][index]['name'],
+                    productAddress: popularProductData['products'][index]
+                        ['address'],
+                    price: popularProductData['products'][index]['daily_price'],
                     imageUrl:
                         'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
                     onPressed: () {
@@ -164,9 +162,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              childCount: popularProductData['popular_products'].length > 4
+              childCount: popularProductData['products'].length > 4
                   ? 4
-                  : popularProductData['popular_products'].length,
+                  : popularProductData['products'].length,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -221,32 +219,32 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          // SliverGrid(
-          //   delegate: SliverChildBuilderDelegate(
-          //     (context, index) {
-          //       return Padding(
-          //         padding: const EdgeInsets.all(8.0),
-          //         child: ReusablePersonCard(
-          //           personName: topLenderData['top_lender'][index]
-          //                   ['first_name'] +
-          //               ' ' +
-          //               topLenderData['top_lender'][index]['last_name'],
-          //           //TODO: Rating
-          //           personRating: topLenderData['top_lender'][index]
-          //               ['average_star'],
-          //           imageUrl:
-          //               'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
-          //         ),
-          //       );
-          //     },
-          //     childCount: topLenderData['top_lender'].length > 4
-          // ? 4
-          // : topLenderData['top_lender'].length,
-          //   ),
-          //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //     crossAxisCount: 2,
-          //   ),
-          // ),
+          SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ReusablePersonCard(
+                    onPressed: () {},
+                    personName: topLenderData['top_lender'][index]
+                            ['first_name'] +
+                        ' ' +
+                        topLenderData['top_lender'][index]['last_name'],
+                    personRating: topLenderData['top_lender'][index]
+                        ['average_star'],
+                    imageUrl:
+                        'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
+                  ),
+                );
+              },
+              childCount: topLenderData['top_lender'].length > 4
+                  ? 4
+                  : topLenderData['top_lender'].length,
+            ),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+          ),
           SliverFixedExtentList(
             itemExtent: 65.0,
             delegate: SliverChildListDelegate(

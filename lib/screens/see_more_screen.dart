@@ -5,7 +5,7 @@ import 'package:rentio/components/reusable_person_card.dart';
 class SeeMoreScreen extends StatefulWidget {
   //type: products or lenders
   final String type;
-  var jsonData;
+  final jsonData;
 
   SeeMoreScreen({@required this.type, this.jsonData});
 
@@ -36,12 +36,15 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
               (context, index) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: ReusableItemCard(
+                    onPressed: () {},
                     isProduct: true,
-                    productName: widget.jsonData['products'][index]['name'],
-                    price: widget.jsonData['products'][index]['daily_price'],
+                    productName: widget.jsonData['product_products'][index]
+                        ['name'],
+                    price: widget.jsonData['product_products'][index]
+                        ['daily_price'],
                     imageUrl: 'https://www.w3schools.com/w3css/img_lights.jpg'),
               ),
-              childCount: widget.jsonData['products'].length,
+              childCount: widget.jsonData['product_products'].length,
             ),
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
@@ -74,18 +77,18 @@ class _SeeMoreScreenState extends State<SeeMoreScreen> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ReusablePersonCard(
-                    personName: widget.jsonData['lenders'][index]
+                    personName: widget.jsonData['top_lender'][index]
                             ['first_name'] +
                         ' ' +
-                        widget.jsonData['lenders'][index]['last_name'],
-                    personRating: widget.jsonData['lenders'][index]
+                        widget.jsonData['top_lender'][index]['last_name'],
+                    personRating: widget.jsonData['top_lender'][index]
                         ['average_star'],
                     imageUrl:
                         'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
                   ),
                 );
               },
-              childCount: widget.jsonData['lenders'].length,
+              childCount: widget.jsonData['top_lender'].length,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

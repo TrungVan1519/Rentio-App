@@ -74,6 +74,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   void initState() {
     dateTime = DateTime.now();
+    print(widget.jsonData);
     super.initState();
   }
 

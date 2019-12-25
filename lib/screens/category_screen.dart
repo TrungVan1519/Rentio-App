@@ -129,7 +129,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductListScreen(
-                          title: '',
+                          title: jsonData['catalogs'][index]['type'],
                           jsonFileName: 'data/product_based_on_catalog.json',
                         ),
                       ),
@@ -140,7 +140,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
                 );
               },
-              childCount: 5,
+              childCount: jsonData['catalogs'].length,
             ),
           ),
         ],
