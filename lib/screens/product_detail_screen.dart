@@ -4,9 +4,13 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/components/reusable_alert.dart';
+import 'package:rentio/global_data/global_user.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:rentio/services/http_executioner.dart';
+import 'dart:convert';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -137,12 +141,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           Container(
                             width: 40.0,
                             height: 40.0,
-                            decoration: new BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              image: new DecorationImage(
+                              image: DecorationImage(
                                 fit: BoxFit.fill,
-                                image: new NetworkImage(
-                                    "https://friendlystock.com/wp-content/uploads/2018/03/4-surprised-pineapple-cartoon-clipart.jpg"),
+                                //TODO: Sửa lại image của user
+                                image:
+                                    AssetImage('images/default_app_avatar.jpg'),
                               ),
                             ),
                           ),
@@ -152,7 +157,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           Column(
                             children: <Widget>[
                               Text(
-                                'Nguyen Thanh Tung',
+                                //'Nguyen Thanh Tung',
+                                widget.jsonData['products']['name'],
                                 style: TextStyle(
                                   fontSize: kFontTextSmallSize,
                                 ),
@@ -168,6 +174,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     size: 15.0,
                                   ),
                                   Text(
+                                    //TODO: Tạm fix cứng
                                     'Thanh Xuan - Ha Noi',
                                     style: TextStyle(
                                       fontSize: kFontLabelSize,
@@ -211,9 +218,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ],
                       ),
-                      priceAndDateCard(150000, 'ngày'),
-                      priceAndDateCard(150000, 'tuần'),
-                      priceAndDateCard(150000, 'tháng'),
+                      // priceAndDateCard(150000, 'ngày'),
+                      // priceAndDateCard(150000, 'tuần'),
+                      // priceAndDateCard(150000, 'tháng'),
+                      priceAndDateCard(
+                          widget.jsonData['products']['daily_price'], 'ngày'),
+                      priceAndDateCard(
+                          widget.jsonData['products']['weekly_price'], 'tuần'),
+                      priceAndDateCard(
+                          widget.jsonData['products']['monthly_price'],
+                          'tháng'),
                     ],
                   ),
                 ),
@@ -319,6 +333,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     );
   }
 
+  void calculatePrice() {
+    int month = (dateDiff / 30).toInt();
+    int week = ((dateDiff % 30) / 7).toInt();
+    int day = ((dateDiff % 30) % 7).toInt();
+    setState(() {
+      totalPrice = month * widget.jsonData['products']['monthly_price'] +
+          week * widget.jsonData['products']['weekly_price'] +
+          day * widget.jsonData['products']['daily_price'];
+    });
+  }
+
   void showCalendar(String dateFrom) async {
     DateTime newDateTime = await showRoundedDatePicker(
       context: context,
@@ -355,6 +380,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             dateDiff =
                 endDateInDateTime.difference(startDateInDateTime).inDays + 2;
             print(dateDiff);
+            calculatePrice();
           }
         },
       );
@@ -384,7 +410,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               fontSize: 16,
             ),
           ),
-          onPressed: () {},
+          onPressed: () async {
+            http.Response responsePost = await HttpExecutioner.post(
+              requestURL:
+                  "http://192.168.2.107:8080/api/products/${GlobalUser.globalUser.id}/order/request",
+              headers: {
+                "content-type": "application/json",
+                "authorization": "JWT ${GlobalUser.globalUser.id}",
+              },
+              body: {
+                "product_id": widget.jsonData['products']['id'],
+                "start_date": startYear.toString() +
+                    '/' +
+                    startMonth.toString() +
+                    '/' +
+                    startDay.toString(),
+                "end_date": endYear.toString() +
+                    '/' +
+                    endMonth.toString() +
+                    '/' +
+                    endDay.toString(),
+                "lender_national_id":
+                    widget.jsonData['products']['national_id'] ?? "",
+                "bank_number": widget.jsonData['products']['bank_number'] ?? "",
+                "lender_id": widget.jsonData['products']['user_id'],
+                "renter_id": GlobalUser.globalUser.id,
+              },
+              //TODO: Hỏi trung về vụ Global ID là string thay vì int
+            );
+          },
           width: 80,
         ),
         DialogButton(
@@ -401,8 +455,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ],
     ).show();
   }
-
-  void calculatePrice() {}
 
   Widget priceAndDateCard(double price, String dateType) {
     int priceInInt = price.toInt();
