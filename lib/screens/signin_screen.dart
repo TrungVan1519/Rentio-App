@@ -322,7 +322,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
       if (_userNameValid && _passwordValid) {
         // Dong data nay de truyen sang UserScreen
-//        final fullNameData =
+//        final userData =
 //            await JsonGetter(jsonFileName: 'data/signup.json').loadData();
 
         // http://192.168.2.107:8080/user/<username>
@@ -335,10 +335,9 @@ class _SignInScreenState extends State<SignInScreen> {
           },
         );
 
-        final fullNameData = json.decode(responseGet.body);
-
-        String fullName =
-            fullNameData['first_name'] + ' ' + fullNameData['last_name'];
+        final userData = json.decode(responseGet.body);
+        GlobalUser.globalUser.userID = userData['id'];
+        String fullName = userData['first_name'] + ' ' + userData['last_name'];
 
         isLoading = await Navigator.push(
           context,
@@ -393,9 +392,9 @@ class _SignInScreenState extends State<SignInScreen> {
 //        },
 //      );
 //      if (responseGet.statusCode == 200) {
-//        final fullNameData = json.decode(responseGet.body);
+//        final userData = json.decode(responseGet.body);
 //        String fullName =
-//            fullNameData['first_name'] + ' ' + fullNameData['last_name'];
+//            userData['first_name'] + ' ' + userData['last_name'];
 //        print('fullName: $fullName');
 //
 //        Navigator.push(

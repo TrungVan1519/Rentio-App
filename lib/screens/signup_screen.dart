@@ -197,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: TextStyle(
                         fontSize: kFontTextSize,
                       ),
-                      maxLength: 30,
+                      maxLength: 10,
                       controller: _phoneNumberController,
 //                      decoration: InputDecoration(
 //                        labelText: 'Phone number (9-30)',
@@ -210,7 +210,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 //                        errorText: _phoneNumberValid ? null : _phoneNumberError,
 //                      ),
                       decoration: InputDecoration(
-                        hintText: 'Phone number (9-30)',
+                        hintText: 'Phone number (10)',
                         hintStyle: TextStyle(
                           fontSize: kFontLabelSize,
                           fontWeight: FontWeight.bold,
@@ -369,7 +369,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
 
       // check fullname
-      if (_fullNameController.text.length >= 5) {
+      if (_fullNameController.text.length >= 5 &&
+          regexModel.isValidFullName(_fullNameController.text)) {
         setState(() {
           _fullNameValid = true;
         });
@@ -380,7 +381,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
 
       // check phonenumber
-      if (_phoneNumberController.text.length >= 9 &&
+      if (_phoneNumberController.text.length >= 10 &&
           regexModel.isAllNumber(_phoneNumberController.text)) {
         setState(() {
           _phoneNumberValid = true;
@@ -411,9 +412,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           requestURL: 'http://192.168.2.107:8080/register',
           headers: {"content-type": "application/json"},
           body: {
-            'first_name': _fullNameController.text.split(' ')[0] +
-                _fullNameController.text.split(' ')[1],
-            'last_name': _fullNameController.text.split(' ')[2],
+            'first_name': _fullNameController.text.split(' ')[0].trim() +
+                ' ' +
+                _fullNameController.text.split(' ')[1].trim(),
+            'last_name': _fullNameController.text.split(' ')[2].trim(),
             'phone': _phoneNumberController.text,
             'email': _emailController.text,
             "username": _userNameController.text,

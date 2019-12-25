@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
+import 'package:rentio/global_data/global_user.dart';
+import 'package:rentio/services/http_executioner.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/services/regex_validation.dart';
+import 'package:http/http.dart' as http;
 
 class UpdatingUserInfoScreen extends StatefulWidget {
   @override
@@ -76,10 +79,10 @@ class _UpdatingUserInfoScreenState extends State<UpdatingUserInfoScreen> {
                       style: TextStyle(
                         fontSize: kFontTextSize,
                       ),
-                      maxLength: 30,
+                      maxLength: 10,
                       controller: _phoneNumberController,
                       decoration: InputDecoration(
-                        labelText: 'Phone number (9-30)',
+                        labelText: 'Phone number (10)',
                         labelStyle: TextStyle(
                           color: Colors.black,
                           fontSize: kFontLabelSize,
@@ -179,19 +182,24 @@ class _UpdatingUserInfoScreenState extends State<UpdatingUserInfoScreen> {
     Navigator.pop(context);
   }
 
-  onSavePressed() {
-    setState(() {
+  void onSavePressed() async {
+    setState(() async {
       RegexModel regexModel = new RegexModel();
 
       // check fullname
-      if (_fullNameController.text.length >= 5) {
-        _fullNameValid = true;
+      if (_fullNameController.text.length >= 5 &&
+          regexModel.isValidFullName(_fullNameController.text)) {
+        setState(() {
+          _fullNameValid = true;
+        });
       } else {
-        _fullNameValid = false;
+        setState(() {
+          _fullNameValid = false;
+        });
       }
 
       // check phonenumber
-      if (_phoneNumberController.text.length >= 9 &&
+      if (_phoneNumberController.text.length >= 10 &&
           regexModel.isAllNumber(_phoneNumberController.text)) {
         _phoneNumberValid = true;
       } else {
@@ -210,6 +218,40 @@ class _UpdatingUserInfoScreenState extends State<UpdatingUserInfoScreen> {
           context: context,
           title: 'Conpleted',
           desc: 'Your info was updated completed',
+        ).getAlert();
+      }
+
+      http.Response responsePost = await HttpExecutioner.post(
+        requestURL:
+            'http://192.168.2.107:8080/edit_profile/${GlobalUser.globalUser.userName}',
+        headers: {
+          "content-type": "application/json",
+          'authorization': 'JWT ${GlobalUser.globalUser.id}'
+        },
+        body: {
+          'first_name': _fullNameController.text.split(' ')[0].trim() +
+              ' ' +
+              _fullNameController.text.split(' ')[1].trim(),
+          'last_name': _fullNameController.text.split(' ')[2].trim(),
+          'gender': null,
+          'birthday': null,
+          'phone': _phoneNumberController.text,
+          'email': _emailController.text,
+          'address': null,
+          'job': null
+        },
+      );
+      if (responsePost.statusCode == 200) {
+        ReusableAlert(
+          context: context,
+          title: 'Conpleted',
+          desc: 'Your account was updated completed',
+        ).getAlert();
+      } else {
+        ReusableAlert(
+          context: context,
+          title: 'Uncompleted',
+          desc: 'Your account was updated fail',
         ).getAlert();
       }
     });
