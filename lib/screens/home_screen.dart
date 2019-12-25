@@ -6,6 +6,9 @@ import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/components/reusable_person_card.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 import 'package:rentio/utilities/constants.dart';
+import 'package:http/http.dart' as http;
+import 'package:rentio/services/http_executioner.dart';
+import 'dart:convert';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = 'homeScreen';
@@ -17,13 +20,38 @@ class _HomeScreenState extends State<HomeScreen> {
   var popularProductData;
   var topLenderData;
 
+  Future getTopLenderData() async {
+    http.Response responseGet = await HttpExecutioner.get(
+      requestURL: "http://192.168.2.107:8080/api/top_lender",
+      headers: {
+        "content-type": "application/json",
+      },
+    );
+    return await json.decode(responseGet.body);
+  }
+
   Future getTopLenderJson() async {
-    return await JsonGetter(jsonFileName: 'data/top_lender.json').loadData();
+    // return await JsonGetter(jsonFileName: 'data/top_lender.json').loadData();
+    var json = await getTopLenderData();
+    return json;
+  }
+
+  Future getPopularProductData() async {
+    http.Response responseGet = await HttpExecutioner.get(
+      requestURL: "http://192.168.2.107:8080/api/products/popular",
+      headers: {
+        "content-type": "application/json",
+      },
+    );
+
+    return await json.decode(responseGet.body);
   }
 
   Future getPopularProductJson() async {
-    return await JsonGetter(jsonFileName: 'data/popular_product.json')
-        .loadData();
+    // return await JsonGetter(jsonFileName: 'data/popular_product.json')
+    //     .loadData();
+    var json = await getPopularProductData();
+    return json;
   }
 
   Widget loadLoadingWidget() {
@@ -117,10 +145,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: ReusableItemCard(
                     isProduct: true,
-                    productName: popularProductData['products'][index]['name'],
-                    productAddress: popularProductData['products'][index]
-                        ['address'],
-                    price: popularProductData['products'][index]['daily_price'],
+                    productName: popularProductData['popular_products'][index]
+                        ['name'],
+                    productAddress: popularProductData['popular_products']
+                        [index]['address'],
+                    price: popularProductData['popular_products'][index]
+                        ['daily_price'],
                     imageUrl:
                         'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
                     onPressed: () {
@@ -134,7 +164,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              childCount: 4,
+              childCount: popularProductData['popular_products'].length > 4
+                  ? 4
+                  : popularProductData['popular_products'].length,
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -189,28 +221,32 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ReusablePersonCard(
-                    personName: topLenderData['lenders'][index]['first_name'] +
-                        ' ' +
-                        topLenderData['lenders'][index]['last_name'],
-                    personRating: topLenderData['lenders'][index]
-                        ['average_star'],
-                    imageUrl:
-                        'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
-                  ),
-                );
-              },
-              childCount: 4,
-            ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-            ),
-          ),
+          // SliverGrid(
+          //   delegate: SliverChildBuilderDelegate(
+          //     (context, index) {
+          //       return Padding(
+          //         padding: const EdgeInsets.all(8.0),
+          //         child: ReusablePersonCard(
+          //           personName: topLenderData['top_lender'][index]
+          //                   ['first_name'] +
+          //               ' ' +
+          //               topLenderData['top_lender'][index]['last_name'],
+          //           //TODO: Rating
+          //           personRating: topLenderData['top_lender'][index]
+          //               ['average_star'],
+          //           imageUrl:
+          //               'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
+          //         ),
+          //       );
+          //     },
+          //     childCount: topLenderData['top_lender'].length > 4
+          // ? 4
+          // : topLenderData['top_lender'].length,
+          //   ),
+          //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //     crossAxisCount: 2,
+          //   ),
+          // ),
           SliverFixedExtentList(
             itemExtent: 65.0,
             delegate: SliverChildListDelegate(
@@ -254,11 +290,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // get json data ".then" update states to reload the screen
     getTopLenderJson().then((result) {
+      print(result);
       setState(() {
         topLenderData = result;
       });
     });
     getPopularProductJson().then((result) {
+      print(result);
       setState(() {
         popularProductData = result;
       });
