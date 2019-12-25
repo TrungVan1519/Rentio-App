@@ -8,6 +8,8 @@ import 'package:rentio/screens/product_list.dart';
 import 'package:rentio/services/search_engine.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
+import 'package:http/http.dart' as http;
+import 'package:rentio/services/http_executioner.dart';
 
 class CategoryScreen extends StatefulWidget {
   static String routeName = 'categoryScreen';
@@ -18,8 +20,21 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   var jsonData;
 
+  Future getData() async {
+    //return await JsonGetter(jsonFileName: 'data/catalog.json').loadData();
+    http.Response responseGet = await HttpExecutioner.get(
+      requestURL: "http://192.168.2.107:8080/api/catalog",
+      headers: {
+        "content-type": "application/json",
+      },
+    );
+
+    return json.decode(responseGet.body);
+  }
+
   Future getJson() async {
-    return await JsonGetter(jsonFileName: 'data/catalog.json').loadData();
+    var json = await getData();
+    return json;
   }
 
   @override

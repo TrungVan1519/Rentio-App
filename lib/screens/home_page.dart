@@ -6,11 +6,13 @@ import 'package:rentio/screens/category_screen.dart';
 import 'package:rentio/screens/notification_screen.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
-
+import 'dart:convert';
 import '../data_models/product_in_stock.dart';
 import '../data_models/product_in_stock.dart';
 import '../local_json_getter/sign_in_json_getter.dart';
 import 'home_screen.dart';
+import 'package:http/http.dart' as http;
+import 'package:rentio/services/http_executioner.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -29,8 +31,21 @@ class _HomePageState extends State<HomePage> {
   var jsonData;
 
   Future getInitProductData() async {
-    return await JsonGetter(jsonFileName: 'data/get_all_products.json')
-        .loadData();
+    // return await JsonGetter(jsonFileName: 'data/get_all_products.json')
+    //     .loadData();
+    http.Response responseGet = await HttpExecutioner.get(
+      requestURL: "http://192.168.2.107:8080/api/products",
+      headers: {
+        "content-type": "application/json",
+      },
+    );
+
+    return await json.decode(responseGet.body);
+  }
+
+  Future getInitProductJson() async {
+    var json = await getInitProductData();
+    return json;
   }
 
   @override
@@ -49,6 +64,10 @@ class _HomePageState extends State<HomePage> {
           monthly_price: jsonData['products'][i]['monthly_price'],
           user_id: jsonData['products'][i]['user_id'],
         ));
+      }
+    }).then((_) {
+      for (int i = 0; i < jsonData['products'].length; i++) {
+        print(jsonData['products'][i]['name']);
       }
     });
   }
