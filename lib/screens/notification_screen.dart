@@ -54,22 +54,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
       ),
       body: ListView(
         children: <Widget>[
-          StreamBuilder(
-            stream: NotiListener.renterChannel.stream,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Text('no data');
-              }
-              return ListTile(
-                leading: Icon(
-                  Icons.notifications,
-                  color: Colors.green,
-                  size: 30.0,
-                ),
-                title: Text('Hello!'),
-                subtitle: Text('Hello again!'),
-              );
+          ListTile(
+            onTap: () {
+              
             },
+            leading: Icon(
+              Icons.notifications,
+              color: Colors.green,
+              size: 30.0,
+            ),
+            title: Text('Hello!'),
+            subtitle: Text('Hello again!'),
           ),
         ],
       ),

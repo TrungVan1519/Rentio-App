@@ -6,6 +6,7 @@ import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 import 'package:rentio/screens/list_items_screen.dart';
 import 'package:rentio/screens/product_list.dart';
 import 'package:rentio/services/search_engine.dart';
+import 'package:rentio/services/stringManipulator.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
 import 'package:http/http.dart' as http;
@@ -54,6 +55,42 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   Widget loadWidgetWithData() {
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverGrid(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return ReusableItemCard(
+                isProduct: false,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductListScreen(
+                        title: StringManipulator.changeFirstLetterUpperCase(
+                            jsonData['catalogs'][index]['type']),
+                        jsonFileName: 'data/product_based_on_catalog.json',
+                      ),
+                    ),
+                  );
+                },
+                catalogName: jsonData['catalogs'][index]['type'],
+                imageUrl:
+                    'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
+              );
+            },
+            childCount: jsonData['catalogs'].length,
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -114,43 +151,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
         ],
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-            ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return ReusableItemCard(
-                  isProduct: false,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductListScreen(
-                          title: jsonData['catalogs'][index]['type'],
-                          jsonFileName: 'data/product_based_on_catalog.json',
-                        ),
-                      ),
-                    );
-                  },
-                  catalogName: jsonData['catalogs'][index]['type'],
-                  imageUrl:
-                      'https://external-preview.redd.it/Rmryan2W90zOKh0uuFeLXlJZ5CPCA-hOmnvv2NFPCCQ.jpg?auto=webp&s=e74d779c246115721c0fe14ed9a36b611a8ad11f',
-                );
-              },
-              childCount: jsonData['catalogs'].length,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
       body: jsonData == null ? loadLoadingWidget() : loadWidgetWithData(),
     );
   }

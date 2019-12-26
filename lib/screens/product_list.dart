@@ -11,7 +11,9 @@ class ProductListScreen extends StatefulWidget {
   static String routeName = 'productListScreen';
   final String title;
   final String jsonFileName;
-  ProductListScreen({this.title, this.jsonFileName});
+  final String searchedName;
+
+  ProductListScreen({this.title, this.jsonFileName, this.searchedName});
 
   @override
   _ProductListScreenState createState() => _ProductListScreenState();
@@ -20,7 +22,7 @@ class ProductListScreen extends StatefulWidget {
 class _ProductListScreenState extends State<ProductListScreen> {
   var jsonData;
 
-  Future getInitData() async {
+  Future getDataBasedOnTitle() async {
     // return await JsonGetter(jsonFileName: widget.jsonFileName).loadData();
     http.Response responseGet = await HttpExecutioner.get(
       requestURL:
@@ -33,18 +35,46 @@ class _ProductListScreenState extends State<ProductListScreen> {
     return json.decode(responseGet.body);
   }
 
-  Future getInitJson() async {
-    var json = await getInitData();
+  Future getJsonBasedOnTitle() async {
+    var json = await getDataBasedOnTitle();
+    return json;
+  }
+
+  Future getDataBasedOnProductName() async {
+    // return await JsonGetter(jsonFileName: widget.jsonFileName).loadData();
+    http.Response responseGet = await HttpExecutioner.get(
+      requestURL:
+          "http://192.168.2.107:8080/api/products/posts/${widget.searchedName}",
+      headers: {
+        'content-type': 'application/json',
+      },
+    );
+
+    return json.decode(responseGet.body);
+  }
+
+  Future getJsonBasedOnProductName() async {
+    var json = await getDataBasedOnProductName();
     return json;
   }
 
   @override
   void initState() {
-    getInitJson().then((result) {
-      setState(() {
-        jsonData = result;
+    if (widget.searchedName == null) {
+      getJsonBasedOnProductName().then((result) {
+        print(result);
+        setState(() {
+          jsonData = result;
+        });
       });
-    });
+    } else {
+      getJsonBasedOnTitle().then((result) {
+        print(result);
+        setState(() {
+          jsonData = result;
+        });
+      });
+    }
     super.initState();
   }
 
