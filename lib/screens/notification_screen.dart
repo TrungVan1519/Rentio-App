@@ -1,7 +1,6 @@
 import 'dart:io';
-import 'package:rentio/services/noti_listener.dart';
-import 'package:web_socket_channel/io.dart';
 import 'package:flutter/material.dart';
+import 'package:rentio/global_data/notification_data.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 import 'package:rentio/utilities/constants.dart';
 
@@ -13,26 +12,7 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  List<Widget> notificationList = [
-    ListTile(
-      leading: Icon(
-        Icons.notifications,
-        color: Colors.red,
-        size: 30.0,
-      ),
-      title: Text('Hello!'),
-      subtitle: Text('Hello again!'),
-    ),
-    ListTile(
-      leading: Icon(
-        Icons.notifications,
-        color: Colors.green,
-        size: 30.0,
-      ),
-      title: Text('Hello!'),
-      subtitle: Text('Hello again!'),
-    ),
-  ];
+  //
 
   @override
   Widget build(BuildContext context) {
@@ -52,22 +32,40 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
       ),
-      body: ListView(
-        children: <Widget>[
-          ListTile(
-            onTap: () {
-              
-            },
-            leading: Icon(
-              Icons.notifications,
-              color: Colors.green,
-              size: 30.0,
-            ),
-            title: Text('Hello!'),
-            subtitle: Text('Hello again!'),
+      body: ListView.builder(
+        itemCount: NotificationData.notificationList.length,
+        itemBuilder: (context, index) => ListTile(
+          onTap: () {},
+          leading: Icon(
+            Icons.notifications,
+            color: Colors.green,
+            size: 30.0,
           ),
-        ],
+          title: Text('Hello!'),
+          subtitle: Text('Hello again!'),
+        ),
       ),
     );
   }
 }
+
+// List<Widget> notificationList = [
+//   ListTile(
+//     leading: Icon(
+//       Icons.notifications,
+//       color: Colors.red,
+//       size: 30.0,
+//     ),
+//     title: Text('Hello!'),
+//     subtitle: Text('Hello again!'),
+//   ),
+//   ListTile(
+//     leading: Icon(
+//       Icons.notifications,
+//       color: Colors.green,
+//       size: 30.0,
+//     ),
+//     title: Text('Hello!'),
+//     subtitle: Text('Hello again!'),
+//   ),
+// ];

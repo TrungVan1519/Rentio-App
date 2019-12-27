@@ -96,7 +96,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductDetailScreen(),
+                        builder: (context) => ProductDetailScreen(
+                          product_id: popularProductData['products'][index]
+                              ['product_id'],
+                          productName: popularProductData['products'][index]
+                              ['name'],
+                          productAddress: popularProductData['products'][index]
+                              ['address'],
+                          daily_price: popularProductData['products'][index]
+                              ['daily_price'],
+                          weekly_price: popularProductData['products'][index]
+                              ['weekly_price'],
+                          monthly_price: popularProductData['products'][index]
+                              ['monthly_price'],
+                          lender_id: popularProductData['products'][index]
+                              ['user_id'],
+                        ),
                       ),
                     );
                   },

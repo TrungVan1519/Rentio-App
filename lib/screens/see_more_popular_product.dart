@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/components/reusable_person_card.dart';
+import 'package:rentio/screens/product_detail_screen.dart';
 import 'package:rentio/services/http_executioner.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -47,7 +48,26 @@ class _SeeMorePopularProductScreenState
             (context, index) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: ReusableItemCard(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDetailScreen(
+                          product_id: jsonData['products'][index]['product_id'],
+                          productName: jsonData['products'][index]['name'],
+                          productAddress: jsonData['products'][index]
+                              ['address'],
+                          daily_price: jsonData['products'][index]
+                              ['daily_price'],
+                          weekly_price: jsonData['products'][index]
+                              ['weekly_price'],
+                          monthly_price: jsonData['products'][index]
+                              ['monthly_price'],
+                          lender_id: jsonData['products'][index]['user_id'],
+                        ),
+                      ),
+                    );
+                  },
                   isProduct: true,
                   productName: jsonData['products'][index]['name'],
                   price: jsonData['products'][index]['daily_price'],

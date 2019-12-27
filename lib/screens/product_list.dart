@@ -26,7 +26,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     // return await JsonGetter(jsonFileName: widget.jsonFileName).loadData();
     http.Response responseGet = await HttpExecutioner.get(
       requestURL:
-          "http://192.168.2.107:8080/api/products/catalog/${widget.title}",
+          "http://192.168.2.107:8080/api/products/catalog/${widget.title.toLowerCase()}",
       headers: {
         'content-type': 'application/json',
       },
@@ -60,7 +60,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   void initState() {
-    if (widget.searchedName == null) {
+    if (widget.searchedName != null) {
       getJsonBasedOnProductName().then((result) {
         print(result);
         setState(() {
@@ -69,7 +69,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
       });
     } else {
       getJsonBasedOnTitle().then((result) {
-        print(result);
         setState(() {
           jsonData = result;
         });
@@ -97,7 +96,17 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ProductDetailScreen(
-                          jsonData: jsonData['products'][index],
+                          product_id: jsonData['products'][index]['product_id'],
+                          productName: jsonData['products'][index]['name'],
+                          productAddress: jsonData['products'][index]
+                              ['address'],
+                          daily_price: jsonData['products'][index]
+                              ['daily_price'],
+                          weekly_price: jsonData['products'][index]
+                              ['weekly_price'],
+                          monthly_price: jsonData['products'][index]
+                              ['monthly_price'],
+                          lender_id: jsonData['products'][index]['user_id'],
                         ),
                       ),
                     );
@@ -105,7 +114,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   isProduct: true,
                   productName: jsonData['products'][index]['name'],
                   price: jsonData['products'][index]['daily_price'],
-                  imageUrl: 'https://www.w3schools.com/w3css/img_lights.jpg'),
+                  imageUrl: 'image/default_product_image.jpg'),
             ),
             childCount: jsonData['products'].length,
           ),

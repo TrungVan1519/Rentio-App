@@ -5,6 +5,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/global_data/global_user.dart';
+import 'package:rentio/services/stringManipulator.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
@@ -46,9 +47,28 @@ final List child = map<Widget>(
 
 class ProductDetailScreen extends StatefulWidget {
   static String routeName = 'productDetailScreen';
-  var jsonData;
+  // final jsonData;
 
-  ProductDetailScreen({this.jsonData});
+  // ProductDetailScreen({this.jsonData});
+
+  final int product_id;
+  final String productName;
+  final String productAddress;
+  final double daily_price;
+  final double weekly_price;
+  final double monthly_price;
+  final int renter_id;
+  final int lender_id;
+
+  ProductDetailScreen(
+      {this.renter_id,
+      this.lender_id,
+      this.product_id,
+      this.productName,
+      this.productAddress,
+      this.daily_price,
+      this.weekly_price,
+      this.monthly_price});
 
   @override
   _ProductDetailScreenState createState() => _ProductDetailScreenState();
@@ -66,7 +86,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   int endDay;
   int endMonth;
   int endYear;
-  int totalPrice = 0;
+  double totalPrice = 0;
   int dateDiff;
   DateTime startDateInDateTime;
   DateTime endDateInDateTime;
@@ -74,7 +94,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   void initState() {
     dateTime = DateTime.now();
-    print(widget.jsonData);
+    print(GlobalUser.globalUser.id);
     super.initState();
   }
 
@@ -158,8 +178,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           Column(
                             children: <Widget>[
                               Text(
-                                //'Nguyen Thanh Tung',
-                                widget.jsonData['products']['name'],
+                                'Nguyen Thanh Tung',
                                 style: TextStyle(
                                   fontSize: kFontTextSmallSize,
                                 ),
@@ -175,8 +194,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                     size: 15.0,
                                   ),
                                   Text(
-                                    //TODO: Tạm fix cứng
-                                    'Thanh Xuan - Ha Noi',
+                                    widget.productAddress,
                                     style: TextStyle(
                                       fontSize: kFontLabelSize,
                                       fontWeight: FontWeight.bold,
@@ -194,7 +212,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Tên sản phẩm',
+                            StringManipulator.changeFirstLetterUpperCase(
+                                widget.productName),
                             style: TextStyle(
                               fontSize: kFontProductTitleSize,
                               fontWeight: FontWeight.bold,
@@ -222,13 +241,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       // priceAndDateCard(150000, 'ngày'),
                       // priceAndDateCard(150000, 'tuần'),
                       // priceAndDateCard(150000, 'tháng'),
-                      priceAndDateCard(
-                          widget.jsonData['products']['daily_price'], 'ngày'),
-                      priceAndDateCard(
-                          widget.jsonData['products']['weekly_price'], 'tuần'),
-                      priceAndDateCard(
-                          widget.jsonData['products']['monthly_price'],
-                          'tháng'),
+                      priceAndDateCard(widget.daily_price, 'ngày'),
+                      priceAndDateCard(widget.weekly_price, 'tuần'),
+                      priceAndDateCard(widget.monthly_price, 'tháng'),
                     ],
                   ),
                 ),
@@ -290,7 +305,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Total price: $totalPrice đ',
+                            'Total price: $totalPrice \$',
                             style: TextStyle(
                               fontSize: kFontProductPriceSize,
                             ),
@@ -314,7 +329,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ],
                   ),
                   onPressed: () {
-                    onRentButtonPressed(context);
+                    GlobalUser.globalUser.id == ''
+                        ? alertSignInBeforeRenting(context)
+                        : onRentButtonPressed(context);
                   },
                   child: Text(
                     'Rent',
@@ -339,9 +356,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     int week = ((dateDiff % 30) / 7).toInt();
     int day = ((dateDiff % 30) % 7).toInt();
     setState(() {
-      totalPrice = month * widget.jsonData['products']['monthly_price'] +
-          week * widget.jsonData['products']['weekly_price'] +
-          day * widget.jsonData['products']['daily_price'];
+      totalPrice = month * widget.monthly_price +
+          week * widget.weekly_price +
+          day * widget.daily_price;
     });
   }
 
@@ -388,6 +405,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     }
   }
 
+  void alertSignInBeforeRenting(BuildContext context) {
+    ReusableAlert(context: context, title: "You need to sign in first!")
+        .getAlert();
+  }
+
   void onRentButtonPressed(BuildContext context) {
     Alert(
       style: AlertStyle(
@@ -420,7 +442,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 "authorization": "JWT ${GlobalUser.globalUser.id}",
               },
               body: {
-                "product_id": widget.jsonData['products']['id'],
+                "product_id": widget.product_id,
                 "start_date": startYear.toString() +
                     '/' +
                     startMonth.toString() +
@@ -431,13 +453,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     endMonth.toString() +
                     '/' +
                     endDay.toString(),
-                "lender_national_id":
-                    widget.jsonData['products']['national_id'] ?? "",
-                "bank_number": widget.jsonData['products']['bank_number'] ?? "",
-                "lender_id": widget.jsonData['products']['user_id'],
-                "renter_id": GlobalUser.globalUser.id,
+                "lender_national_id": "123456789101",
+                "bank_number": "12345678910112",
+                "lender_id": widget.lender_id,
+                "renter_id": GlobalUser.globalUser.userID,
               },
-              //TODO: Hỏi trung về vụ Global ID là string thay vì int
             );
           },
           width: 80,
@@ -458,11 +478,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   Widget priceAndDateCard(double price, String dateType) {
-    int priceInInt = price.toInt();
     return Row(
       children: <Widget>[
         Text(
-          '$priceInInt đ/1 $dateType', //Sua cach chuyen bien double -> string
+          '$price \$/1 $dateType', //Sua cach chuyen bien double -> string
           style: TextStyle(
             fontSize: kFontProductPriceSize,
             fontWeight: FontWeight.bold,
