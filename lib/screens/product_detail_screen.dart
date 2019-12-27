@@ -436,7 +436,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           onPressed: () async {
             http.Response responsePost = await HttpExecutioner.post(
               requestURL:
-                  "http://192.168.2.107:8080/api/products/${GlobalUser.globalUser.id}/order/request",
+                  "http://192.168.2.107:8080/api/products/${widget.product_id}/order/request",
               headers: {
                 "content-type": "application/json",
                 "authorization": "JWT ${GlobalUser.globalUser.id}",
