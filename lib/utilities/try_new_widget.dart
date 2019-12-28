@@ -1,38 +1,86 @@
+import 'package:flutter/foundation.dart';
+import 'package:web_socket_channel/io.dart';
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
-class MyTestWidget extends StatefulWidget {
-  static String routeName = 'myTestWidget';
+class MyTestWidget extends StatelessWidget {
   @override
-  _MyTestWidgetState createState() => _MyTestWidgetState();
+  Widget build(BuildContext context) {
+    final title = 'WebSocket Demo';
+    return MaterialApp(
+      title: title,
+      home: MyHomePage(
+        title: title,
+        channel: IOWebSocketChannel.connect(
+            'ws://192.168.2.107:8080/notification/renters'),
+      ),
+    );
+  }
 }
 
-class _MyTestWidgetState extends State<MyTestWidget> {
-  List<String> myList = ['1', '2', 'three', '4'];
+class MyHomePage extends StatefulWidget {
+  final String title;
+  final WebSocketChannel channel;
+
+  MyHomePage({Key key, @required this.title, @required this.channel})
+      : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: <Widget>[
-          FlatButton(
-            child: Text('Push me!'),
-            onPressed: () {
-              setState(() {
-                myList.add('newText');
-              });
-            },
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: myList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Text(myList[index]);
-              },
-            ),
-          ),
-        ],
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Form(
+              child: TextFormField(
+                controller: _controller,
+                decoration: InputDecoration(labelText: 'Send a message'),
+              ),
+            ),
+            StreamBuilder(
+              stream: widget.channel.stream,
+              builder: (context, snapshot) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24.0),
+                  child: Text(snapshot.hasData ? '${snapshot.data}' : ''),
+                );
+              },
+            )
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _sendMessage,
+        tooltip: 'Send message',
+        child: Icon(Icons.send),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _sendMessage() {
+    if (_controller.text.isNotEmpty) {
+      widget.channel.sink.add(_controller.text);
+      widget.channel.stream.listen((data) {
+        print(data);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.channel.sink.close();
+    super.dispose();
   }
 }

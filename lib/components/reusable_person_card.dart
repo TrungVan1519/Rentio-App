@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/services/stringManipulator.dart';
 
 class ReusablePersonCard extends StatelessWidget {
   final String personName;
-  final double personRating;
+  final int personRating;
   final String imageUrl;
   final Function onPressed;
 
@@ -33,8 +34,10 @@ class ReusablePersonCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             getImage(),
-            Text(personName.toString()),
-            Text(personRating.toString() + '/5.0'),
+            Text(StringManipulator.changeFirstLetterUpperCase(
+                personName.toString())),
+            //Tam thoi nhan gia tri rating la int roi convert ra double
+            Text(personRating.toDouble().toString() + '/5.0'),
           ],
         ),
       ),

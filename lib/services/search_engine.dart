@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/screens/product_list.dart';
+import 'package:rentio/services/stringManipulator.dart';
 import 'package:rentio/utilities/constants.dart';
 import '../models/product_in_stock.dart';
 
@@ -43,7 +45,26 @@ class ProductSearch extends SearchDelegate<ProductInStock> {
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: (context, index) => ListTile(
-        title: Text(suggestionList[index].name),
+        title: FlatButton(
+          splashColor: Colors.grey,
+          color: Color(transparent),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(suggestionList[index].name),
+          ),
+          onPressed: () {
+            query = suggestionList[index].name;
+            print(query);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductListScreen(
+                    title: StringManipulator.changeFirstLetterUpperCase(query),
+                    searchedName: query.toString(),
+                  ),
+                ));
+          },
+        ),
       ),
     );
   }

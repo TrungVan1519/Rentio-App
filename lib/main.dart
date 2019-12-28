@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
         ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
         ListItemsScreen.routeName: (context) => ListItemsScreen(),
         ProductListScreen.routeName: (context) => ProductListScreen(),
-        MyTestWidget.routeName: (context) => MyTestWidget(),
       },
     );
   }

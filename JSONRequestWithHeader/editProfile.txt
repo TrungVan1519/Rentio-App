@@ -1,0 +1,11 @@
+POST /edit_profile HTTP/1.1
+Content-type: application/json
+Authorization: JWT {{jwt_token}}
+
+{
+	"username": "duy",
+	"gender": "male",
+	"birthday": "1999/08/04",
+	"address": "Hanoi",
+	"job": "Student"
+}

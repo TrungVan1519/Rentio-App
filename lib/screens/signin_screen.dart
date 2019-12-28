@@ -9,6 +9,7 @@ import 'package:rentio/services/http_executioner.dart';
 import 'package:rentio/screens/user_screen.dart';
 import 'package:rentio/utilities/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:rentio/utilities/try_new_widget.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -282,7 +283,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
     // http://192.168.2.107:8080/auth
     http.Response responsePost = await HttpExecutioner.post(
-      requestURL: 'http://172.20.10.5:8080/auth',
+      requestURL: '$apiURL/auth',
       headers: {"content-type": "application/json"},
       body: {
         "username": _userNameController.text,
@@ -327,8 +328,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
         // http://192.168.2.107:8080/user/<username>
         http.Response responseGet = await HttpExecutioner.get(
-          requestURL:
-              'http://172.20.10.5:8080/user/${GlobalUser.globalUser.userName}',
+          requestURL: '$apiURL/user/${GlobalUser.globalUser.userName}',
           headers: {
             "content-type": "application/json",
             'authorization': 'JWT ${GlobalUser.globalUser.id}'

@@ -4,12 +4,14 @@ import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/components/reusable_loading_card.dart';
 import 'package:rentio/global_data/global_user.dart';
+import 'package:rentio/global_data/notification_data.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 import 'package:rentio/screens/lending_screen.dart';
 import 'package:rentio/screens/list_items_screen.dart';
 import 'package:rentio/screens/updating_account_info_screen.dart';
 import 'package:rentio/screens/updating_user_info_screen.dart';
 import 'package:rentio/utilities/constants.dart';
+import 'package:rentio/utilities/try_new_widget.dart';
 
 class UserScreen extends StatefulWidget {
   final String fullName;
@@ -54,6 +56,8 @@ class _UserScreenState extends State<UserScreen> {
 
   @override
   void initState() {
+    //Bat dau nghe noti
+    //NotificationData.startListening();
     super.initState();
     // (?? :)) ??) Chu y phai truyen tham so '_' vao ham '(_)'
     // Co tac dung chay ngay sau khi build xong cay UI (hay noi cach khac chay ngay

@@ -222,8 +222,7 @@ class _UpdatingUserInfoScreenState extends State<UpdatingUserInfoScreen> {
       }
 
       http.Response responsePost = await HttpExecutioner.post(
-        requestURL:
-            'http://172.20.10.5:8080/edit_profile/${GlobalUser.globalUser.userName}',
+        requestURL: '$apiURL/edit_profile/${GlobalUser.globalUser.userName}',
         headers: {
           "content-type": "application/json",
           'authorization': 'JWT ${GlobalUser.globalUser.id}'

@@ -1,6 +1,7 @@
 class GlobalUser {
   String _id = '';
   int _userID;
+
   String _userName = '';
 
   static GlobalUser _globalUser = new GlobalUser();

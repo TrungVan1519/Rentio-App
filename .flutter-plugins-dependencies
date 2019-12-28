@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"_info":"// This is a generated file; do not edit or check into version control.","dependencyGraph":[{"name":"path_provider","dependencies":[]}]}
+=======
+{"_info":"// This is a generated file; do not edit or check into version control.","dependencyGraph":[{"name":"adhara_socket_io","dependencies":[]},{"name":"path_provider","dependencies":[]}]}
+>>>>>>> origin/duy1

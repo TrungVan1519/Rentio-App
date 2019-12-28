@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:rentio/models/product.dart';
 import 'package:rentio/services/zip_extractor.dart';
+import 'package:rentio/services/stringManipulator.dart';
 
 //Stateless Widget to layout item card such as product card and catalog card
 

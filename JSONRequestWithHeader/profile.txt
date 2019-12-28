@@ -1,0 +1,5 @@
+GET /user/<name> HTTP
+Content-type: application/json
+Authorization: JWT {{jwt_token}}
+
+No JSON required

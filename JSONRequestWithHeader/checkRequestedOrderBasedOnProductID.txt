@@ -1,0 +1,5 @@
+GET /api/products/<id>/order/request HTTP/1.1
+Content-type: application/json
+Authorization: JWT {{jwt_token}}
+
+No JSON required

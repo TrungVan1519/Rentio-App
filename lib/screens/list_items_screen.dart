@@ -10,6 +10,7 @@ import 'package:rentio/models/product.dart';
 import 'package:rentio/screens/product_detail_screen.dart';
 import 'package:rentio/services/http_executioner.dart';
 import 'package:http/http.dart' as http;
+import 'package:rentio/utilities/constants.dart';
 
 class ListItemsScreen extends StatefulWidget {
   static String routeName = "/ListItemScreen";
@@ -33,7 +34,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
     if (widget.option == 'lending') {
       http.Response responseGetOrder = await HttpExecutioner.get(
         requestURL:
-            'http://172.20.10.5:8080/api/products/order/${GlobalUser.globalUser.userID}/requests',
+            '$apiURL/api/products/order/${GlobalUser.globalUser.userID}/requests',
         headers: {
           "content-type": "application/json",
           'authorization': 'JWT ${GlobalUser.globalUser.id}'
@@ -46,8 +47,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
 
         for (var order in orderListData) {
           http.Response responseGetProduct = await HttpExecutioner.get(
-            requestURL:
-                'http://172.20.10.5:8080/api/products/posts/${order['product_id']}',
+            requestURL: '$apiURL/api/products/posts/${order['product_id']}',
             headers: {
               "content-type": "application/json",
             },
@@ -82,7 +82,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
     if (widget.option == 'renting') {
       http.Response responseGetOrder = await HttpExecutioner.get(
         requestURL:
-            'http://172.20.10.5:8080/api/products/order/${GlobalUser.globalUser.userID}/responses',
+            '$apiURL/api/products/order/${GlobalUser.globalUser.userID}/responses',
         headers: {
           "content-type": "application/json",
           'authorization': 'JWT ${GlobalUser.globalUser.id}'
@@ -95,8 +95,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
 
         for (var order in orderListData) {
           http.Response responseGetProduct = await HttpExecutioner.get(
-            requestURL:
-                'http://172.20.10.5:8080/api/products/posts/${order['product_id']}',
+            requestURL: '$apiURL/api/products/posts/${order['product_id']}',
             headers: {
               "content-type": "application/json",
             },

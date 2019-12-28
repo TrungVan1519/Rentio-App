@@ -32,9 +32,15 @@ dependencies:
   date_range_picker: ^1.0.6
   flutter_rounded_date_picker: ^0.3.0
   http: ^0.12.0+2
+  adhara_socket_io: ^0.4.1
   web_socket_channel: ^1.1.0
+<<<<<<< HEAD
   path_provider: ^0.4.1
   archive: ^2.0.11
+=======
+  archive: ^2.0.11
+  path_provider: ^0.4.1
+>>>>>>> origin/duy1
 
 dev_dependencies:
   flutter_test:

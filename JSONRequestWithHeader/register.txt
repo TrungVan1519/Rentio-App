@@ -1,0 +1,11 @@
+POST /register HTTP/1.1
+Content-type: application/json
+
+{
+  "first_name": "hoan",
+  "last_name": "le",
+  "phone": "0981233414",
+  "email": "hoan08@gmail.com",
+  "username": "hoan",
+  "password": "123456"
+}

@@ -1,0 +1,15 @@
+POST /api/products/<id>/order/response HTTP/1.1
+Content-type: application/json
+Authorization: JWT {{jwt_token}}
+
+{
+    "product_id": 1,
+    "start_date": "2019/02/03",
+    "end_date": "2019/02/29",
+    "lender_national_id": "193140321879",
+    "renter_national_id": "193140321879",
+    "bank_number": "13482345817381",
+    "lender_id": 1,
+    "renter_id": 2,
+    "accepted": true
+}

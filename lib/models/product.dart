@@ -16,7 +16,7 @@ class Product {
       {this.id,
       this.userId,
       @required this.name,
-      @required this.img_vid_url,
+      this.img_vid_url,
       this.status,
       @required this.address,
       @required this.daily_price,
