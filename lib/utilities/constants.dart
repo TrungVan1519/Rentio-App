@@ -11,3 +11,5 @@ const kGradientColorElement1 = 0xFF43C6AC;
 const kGradientColorElement2 = 0xFF191654;
 
 const transparent = 0x00000000;
+
+const apiURL = 'http://172.20.10.5:8080';

@@ -56,7 +56,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   void initState() {
     //Bat dau nghe noti
-    NotificationData.startListening();
+    //NotificationData.startListening();
     super.initState();
     // (?? :)) ??) Chu y phai truyen tham so '_' vao ham '(_)'
     // Co tac dung chay ngay sau khi build xong cay UI (hay noi cach khac chay ngay

@@ -24,7 +24,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Future getData() async {
     //return await JsonGetter(jsonFileName: 'data/catalog.json').loadData();
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL: "http://192.168.2.107:8080/api/catalog",
+      requestURL: "$apiURL/api/catalog",
       headers: {
         "content-type": "application/json",
       },

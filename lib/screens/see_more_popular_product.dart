@@ -6,6 +6,8 @@ import 'package:rentio/services/http_executioner.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:rentio/utilities/constants.dart';
+
 class SeeMorePopularProductScreen extends StatefulWidget {
   @override
   _SeeMorePopularProductScreenState createState() =>
@@ -18,7 +20,7 @@ class _SeeMorePopularProductScreenState
 
   Future getPopularProductData() async {
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL: "http://192.168.2.107:8080/api/products/popular",
+      requestURL: "$apiURL/api/products/popular",
       headers: {
         "content-type": "application/json",
       },

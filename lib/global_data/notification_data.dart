@@ -3,6 +3,8 @@ import 'package:rentio/global_data/global_user.dart';
 import 'package:rentio/services/http_executioner.dart';
 import 'dart:convert';
 
+import 'package:rentio/utilities/constants.dart';
+
 class NotificationData {
   static var jsonData;
   static http.Response responseGet;
@@ -11,7 +13,7 @@ class NotificationData {
   static void listenToNoti() async {
     responseGet = await HttpExecutioner.get(
       requestURL:
-          "http://192.168.2.107/notification/renters/${GlobalUser.globalUser.userID}",
+          "$apiURL/notification/renters/${GlobalUser.globalUser.userID}",
       headers: {
         'content-type': 'application/json',
         'authorization': 'JWT ${GlobalUser.globalUser.id}'

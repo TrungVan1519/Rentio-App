@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future getTopLenderData() async {
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL: "http://192.168.2.107:8080/api/top_lender",
+      requestURL: "$apiURL/api/top_lender",
       headers: {
         "content-type": "application/json",
       },
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future getPopularProductData() async {
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL: "http://192.168.2.107:8080/api/products/popular",
+      requestURL: "$apiURL/api/products/popular",
       headers: {
         "content-type": "application/json",
       },

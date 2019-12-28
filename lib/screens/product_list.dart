@@ -25,8 +25,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Future getDataBasedOnTitle() async {
     // return await JsonGetter(jsonFileName: widget.jsonFileName).loadData();
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL:
-          "http://192.168.2.107:8080/api/products/catalog/${widget.title.toLowerCase()}",
+      requestURL: "$apiURL/api/products/catalog/${widget.title.toLowerCase()}",
       headers: {
         'content-type': 'application/json',
       },
@@ -43,8 +42,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Future getDataBasedOnProductName() async {
     // return await JsonGetter(jsonFileName: widget.jsonFileName).loadData();
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL:
-          "http://192.168.2.107:8080/api/products/posts/${widget.searchedName}",
+      requestURL: "$apiURL/api/products/posts/${widget.searchedName}",
       headers: {
         'content-type': 'application/json',
       },

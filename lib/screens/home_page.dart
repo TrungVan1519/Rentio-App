@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     // return await JsonGetter(jsonFileName: 'data/get_all_products.json')
     //     .loadData();
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL: "http://192.168.2.107:8080/api/products",
+      requestURL: "$apiURL/api/products",
       headers: {
         "content-type": "application/json",
       },
@@ -85,11 +85,11 @@ class _HomePageState extends State<HomePage> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: Icon(Icons.category),
             title: Text('Category'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.notifications),
             title: Text('Notification'),
           ),
           BottomNavigationBarItem(

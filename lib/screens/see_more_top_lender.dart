@@ -4,6 +4,8 @@ import 'package:rentio/services/http_executioner.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:rentio/utilities/constants.dart';
+
 class SeeMoreTopLenderScreen extends StatefulWidget {
   @override
   _SeeMoreTopLenderScreenState createState() => _SeeMoreTopLenderScreenState();
@@ -14,7 +16,7 @@ class _SeeMoreTopLenderScreenState extends State<SeeMoreTopLenderScreen> {
 
   Future getTopLenderData() async {
     http.Response responseGet = await HttpExecutioner.get(
-      requestURL: "http://192.168.2.107:8080/api/top_lender",
+      requestURL: "$apiURL/api/top_lender",
       headers: {
         "content-type": "application/json",
       },

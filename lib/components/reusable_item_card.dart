@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rentio/services/stringManipulator.dart';
 
 //Stateless Widget to layout item card such as product card and catalog card
 class ReusableItemCard extends StatelessWidget {
@@ -50,7 +51,8 @@ class ReusableItemCard extends StatelessWidget {
 
   Widget getName() {
     if (productName.toString() != null) {
-      return Text(productName.toString());
+      return Text(
+          StringManipulator.changeFirstLetterUpperCase(productName.toString()));
     }
     return null;
   }
