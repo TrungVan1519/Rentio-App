@@ -1,7 +1,6 @@
 class GlobalUser {
   String _id = '';
-  String _userID;
-
+  int _userID;
   String _userName = '';
 
   static GlobalUser _globalUser = new GlobalUser();
@@ -20,9 +19,9 @@ class GlobalUser {
     _userName = value;
   }
 
-  String get userID => _userID;
+  int get userID => _userID;
 
-  set userID(String value) {
+  set userID(int value) {
     _userID = value;
   }
 

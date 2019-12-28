@@ -409,7 +409,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _phoneNumberValid &&
           _emailValid) {
         http.Response responsePost = await HttpExecutioner.post(
-          requestURL: 'http://192.168.2.107:8080/register',
+          requestURL: 'http://172.20.10.5:8080/register',
           headers: {"content-type": "application/json"},
           body: {
             'first_name': _fullNameController.text.split(' ')[0].trim() +

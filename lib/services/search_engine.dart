@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentio/utilities/constants.dart';
-import '../data_models/product_in_stock.dart';
-import '../data_models/product_in_stock.dart';
+import '../models/product_in_stock.dart';
 
 class ProductSearch extends SearchDelegate<ProductInStock> {
   @override

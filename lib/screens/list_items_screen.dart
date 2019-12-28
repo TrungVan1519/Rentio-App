@@ -1,9 +1,12 @@
+import 'dart:convert';
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_item_card.dart';
 import 'package:rentio/components/reusable_loading_card.dart';
 import 'package:rentio/global_data/global_user.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
+import 'package:rentio/models/product.dart';
 import 'package:rentio/screens/product_detail_screen.dart';
 import 'package:rentio/services/http_executioner.dart';
 import 'package:http/http.dart' as http;
@@ -21,31 +24,51 @@ class ListItemsScreen extends StatefulWidget {
 }
 
 class _ListItemsScreenState extends State<ListItemsScreen> {
-  var data;
+  List<Product> productList;
 
   Future initJsonData() async {
-    var data;
+    List<Product> productList = List<Product>();
 
-    // Cho thue
+    // Cho ng khac thue
     if (widget.option == 'lending') {
       http.Response responseGetOrder = await HttpExecutioner.get(
         requestURL:
-            'http://192.168.2.107:8080//api/products/order/${GlobalUser.globalUser.userID}/requests',
+            'http://172.20.10.5:8080/api/products/order/${GlobalUser.globalUser.userID}/requests',
         headers: {
           "content-type": "application/json",
           'authorization': 'JWT ${GlobalUser.globalUser.id}'
         },
       );
+
       if (responseGetOrder.statusCode == 200) {
-//        List<int> idProductList = await
+        var orderListData =
+            json.decode(responseGetOrder.body)['requested_orders'];
 
-        http.Response responseGetProduct = await HttpExecutioner.get(requestURL: ,);
+        for (var order in orderListData) {
+          http.Response responseGetProduct = await HttpExecutioner.get(
+            requestURL:
+                'http://172.20.10.5:8080/api/products/posts/${order['product_id']}',
+            headers: {
+              "content-type": "application/json",
+            },
+          );
 
-        ReusableAlert(
-          context: context,
-          title: 'Wait for loading',
-          desc: 'Product list is loading',
-        ).getAlert();
+          if (responseGetProduct.statusCode == 200) {
+            var productData = json.decode(responseGetProduct.body);
+
+            productList.add(
+              Product(
+                name: productData['name'],
+//                img_vid_url: productData[
+//                    'img_vid_url'], //http://192.168.2.107:5000/hue/1
+//                img_vid_url:
+//                    'http://coderzheaven.com/youtube_flutter/images.zip',
+                address: productData['address'],
+                daily_price: productData['daily_price'],
+              ),
+            );
+          }
+        }
       } else {
         ReusableAlert(
           context: context,
@@ -55,22 +78,46 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
       }
     }
 
-    // Thue
+    // Thue cua ng khac
     if (widget.option == 'renting') {
       http.Response responseGetOrder = await HttpExecutioner.get(
         requestURL:
-            'http://192.168.2.107:8080//api/products/order/${GlobalUser.globalUser.userID}/responses',
+            'http://172.20.10.5:8080/api/products/order/${GlobalUser.globalUser.userID}/responses',
         headers: {
           "content-type": "application/json",
           'authorization': 'JWT ${GlobalUser.globalUser.id}'
         },
       );
+      print(responseGetOrder.statusCode);
+
       if (responseGetOrder.statusCode == 200) {
-        ReusableAlert(
-          context: context,
-          title: 'Wait for loading',
-          desc: 'Product list is loading',
-        ).getAlert();
+        var orderListData = json.decode(responseGetOrder.body)['orders'];
+
+        for (var order in orderListData) {
+          http.Response responseGetProduct = await HttpExecutioner.get(
+            requestURL:
+                'http://172.20.10.5:8080/api/products/posts/${order['product_id']}',
+            headers: {
+              "content-type": "application/json",
+            },
+          );
+
+          if (responseGetProduct.statusCode == 200) {
+            var productData = json.decode(responseGetProduct.body);
+
+            productList.add(
+              Product(
+                name: productData['name'],
+//                img_vid_url: productData[
+//                    'img_vid_url'], //http://192.168.2.107:5000/hue/1
+//                img_vid_url:
+//                    'http://coderzheaven.com/youtube_flutter/images.zip',
+                address: productData['address'],
+                daily_price: productData['daily_price'],
+              ),
+            );
+          }
+        }
       } else {
         ReusableAlert(
           context: context,
@@ -80,7 +127,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
       }
     }
 
-    return data;
+    return productList;
   }
 
   @override
@@ -100,8 +147,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
 
     initJsonData().then((result) {
       setState(() {
-        data = result;
-        print('data2:$data');
+        productList = result;
       });
     });
   }
@@ -120,10 +166,13 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
           delegate: SliverChildBuilderDelegate(
             (context, index) => ReusableItemCard(
               isProduct: true,
-              productName: data['products'][index]['name'],
-              productAddress: 'abc',
-              price: data['products'][index]['daily_price'],
-              imageUrl: 'https://www.w3schools.com/w3css/img_lights.jpg',
+              productName: productList[index].name,
+              productAddress: productList[index].address,
+              price: productList[index].daily_price,
+              imageUrl: productList[index].img_vid_url == null
+                  ? 'https://www.w3schools.com/w3css/img_lights.jpg'
+                  : productList[index].img_vid_url,
+//              imageFileName: /*productList[index].getImageFileNameFromZipFile()*/,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -133,7 +182,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
                 );
               },
             ),
-            childCount: data['products'].length,
+            childCount: productList.length,
           ),
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
@@ -148,7 +197,7 @@ class _ListItemsScreenState extends State<ListItemsScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: data == null ? loadLoadingWidget() : loadWidgetWithData(),
+      body: productList == null ? loadLoadingWidget() : loadWidgetWithData(),
     );
   }
 }

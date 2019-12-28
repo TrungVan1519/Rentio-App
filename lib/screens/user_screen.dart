@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rentio/components/reusable_alert.dart';
 import 'package:rentio/components/reusable_gradient_button_card.dart';
 import 'package:rentio/components/reusable_loading_card.dart';
+import 'package:rentio/global_data/global_user.dart';
 import 'package:rentio/local_json_getter/sign_in_json_getter.dart';
 import 'package:rentio/screens/lending_screen.dart';
 import 'package:rentio/screens/list_items_screen.dart';
@@ -263,6 +264,9 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   void onBackwardPressed() {
+    GlobalUser.globalUser.id = '';
+    GlobalUser.globalUser.userName = '';
+    GlobalUser.globalUser.userID = null;
     Navigator.pop(context, false);
   }
 
@@ -299,7 +303,8 @@ class _UserScreenState extends State<UserScreen> {
       MaterialPageRoute(
         builder: (context) => ListItemsScreen(
           title: 'Danh sach ta cho ng khac thue',
-          jsonFileName: 'data/response_product_in_stock.json',
+          option: 'lending',
+//          jsonFileName: 'data/response_product_in_stock.json',
         ),
       ),
     );
@@ -311,7 +316,8 @@ class _UserScreenState extends State<UserScreen> {
       MaterialPageRoute(
         builder: (context) => ListItemsScreen(
           title: 'Danh sach ta thue cua ng khac',
-          jsonFileName: 'data/response_product_in_stock.json',
+          option: 'renting',
+//          jsonFileName: 'data/response_product_in_stock.json',
         ),
       ),
     );
@@ -354,6 +360,9 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   void onSignOutPressed() {
+    GlobalUser.globalUser.id = '';
+    GlobalUser.globalUser.userName = '';
+    GlobalUser.globalUser.userID = null;
     Navigator.pop(context, false);
   }
 }

@@ -10,7 +10,10 @@ import 'package:rentio/screens/product_detail_screen.dart';
 import 'package:rentio/screens/product_list.dart';
 import 'package:rentio/screens/signin_screen.dart';
 import 'package:rentio/screens/signup_screen.dart';
+import 'package:rentio/services/zip_extractor.dart';
 import 'package:rentio/utilities/try_new_widget.dart';
+
+import 'mainscreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Color(0xFFF3F3F7),
       ),
-      home: NotificationScreen(),
+      home: HomePage(),
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         CategoryScreen.routeName: (context) => CategoryScreen(),
